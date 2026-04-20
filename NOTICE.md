@@ -53,6 +53,16 @@ Contributions absorbed:
 Repository: https://github.com/jakubkrehel/make-interfaces-feel-better
 License: see upstream
 
+### zenobi-us/dotfiles — basic-design-principles
+Author: zenobi-us
+
+Contributions absorbed:
+- Elevation consistency rule ("pick one elevation treatment per hierarchy level — don't mix a shadow-recipe card with a flat-border card in the same list")
+
+Repository: https://github.com/zenobi-us/dotfiles
+Skill path: `ai/files/packages/creator/skills/devtools/webdesign/basic-design-principles/SKILL.md`
+License: see upstream
+
 ## License
 
 This skill is released under Apache 2.0. When absorbing from upstream skills with compatible licenses, attribution is maintained here and in the specific reference file where the material lives.

@@ -6,6 +6,18 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.10 — 2026-04-20 — Elevation consistency rule
+
+### Added
+- `references/spacing-layout.md` — "pick one elevation treatment per hierarchy level" principle added to the *Shadows Over Borders* section. Guards against mixing shadow-recipe cards with flat-border cards in the same list.
+
+### Sources consulted
+- `zenobi-us/dotfiles` — `basic-design-principles` skill (depth & elevation strategy section). The single absorbed rule; other candidates reviewed and rejected as already-covered, too narrow, or upstream of polish scope.
+- `wondelai/skills` — reviewed, nothing absorbed (strategic/foundational scope misalignment with polish layer).
+- `shovonsheikh/saas-ui-master` — reviewed, nothing absorbed (design-system generator, orthogonal to polish layer).
+
+---
+
 ## 0.1.6 — 2026-04-20 — Naming, evals, npm
 
 ### Changed

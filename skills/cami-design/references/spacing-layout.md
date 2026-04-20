@@ -46,6 +46,8 @@ When in doubt, trust your eye over the math.
 
 For buttons, cards, and containers that use a border for depth or elevation, prefer `box-shadow`. Shadows adapt to any background; solid borders don't. **Do not apply to dividers or layout separators** — those should stay as borders.
 
+**Pick one elevation treatment per hierarchy level.** Don't mix a shadow-recipe card with a flat-border card in the same list — the difference reads as drift, not intent.
+
 ### Light mode — 3-layer shadow
 
 ```css
@@ -153,4 +155,4 @@ Align to a baseline grid. Body text leading defines the unit; spacing between bl
 
 ## Attribution
 
-Synthesized from: pbakaus/impeccable `spatial-design.md`, jakubkrehel/make-interfaces-feel-better `surfaces.md`, emilkowalski/skill.
+Synthesized from: pbakaus/impeccable `spatial-design.md`, jakubkrehel/make-interfaces-feel-better `surfaces.md`, emilkowalski/skill, zenobi-us/dotfiles `basic-design-principles` (elevation consistency rule).
