@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 
-const SKILLS = ["atelier-design", "layout", "interaction", "copy"];
+const SKILLS = ["atelier-design", "atelier-layout", "atelier-interaction", "atelier-copy"];
 const targetDir = path.join(os.homedir(), ".claude", "skills");
 
 let removed = [];
