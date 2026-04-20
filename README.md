@@ -2,81 +2,79 @@
 
 Camille Pawlak's personal Claude Code design skill. A curated collection of principles, references, and modes for building and reviewing interfaces with intent.
 
-## What's inside
-
-A parent skill (`atelier-design`) holds shared design principles, references, and the context-gathering protocol. Three sub-skills handle specific concerns:
-
-- **`layout`** — alignment, sizing, spacing, visual hierarchy, rhythm
-- **`interaction`** — animation, hover/press states, micro-interactions, delight
-- **`copy`** — microcopy, labels, errors, tone
-
-More modes may land over time (flow/experience, typography deep-dive, etc.).
-
-## Structure
-
-```
-pwlk-atelier-design/
-├── skills/
-│   ├── atelier-design/        # parent skill: principles + references
-│   │   ├── SKILL.md
-│   │   ├── references/        # deep topical material, loaded on demand
-│   │   └── libraries/         # structured data (palettes, easing, fonts)
-│   ├── layout/SKILL.md
-│   ├── interaction/SKILL.md
-│   └── copy/SKILL.md
-├── evals/                     # before/after test cases for iterative improvement
-├── CHANGELOG.md               # what was absorbed from where, when
-└── NOTICE.md                  # attribution to upstream skills
-```
-
 ## Install
 
-Clone into your Claude Code skills directory:
-
 ```bash
-git clone https://github.com/pwlk/pwlk-atelier-design ~/.claude/skills/pwlk-atelier-design
+npm install -g pwlk-atelier-design
 ```
 
-Claude Code will pick up the skills under `skills/` automatically on the next session.
+That's it. Four slash commands are linked into Claude Code automatically.
 
 ## Usage
 
-Invoke the parent to orient, then a sub-skill for specific work:
-
 ```
-/atelier-design              — load shared principles and pick a mode
-/atelier-design layout       — review layout, alignment, spacing
-/atelier-design interaction  — review motion, feedback, delight
-/atelier-design copy         — review microcopy and tone
+/atelier-design        — load shared principles, route to a mode
+/atelier-layout        — alignment, sizing, spacing, visual hierarchy
+/atelier-interaction   — animation, hover/press states, micro-interactions
+/atelier-copy          — microcopy, labels, errors, tone
 ```
 
-Or let the skill auto-trigger when you mention related work — the frontmatter descriptions are tuned for that.
+Or let the skills auto-trigger — the frontmatter descriptions are tuned to activate on related work.
 
 ## Design Context
 
-Design work produces generic output without project context. Before the first run, create a `.atelier.md` at your project root with:
+Design work produces generic output without project context. Before the first run, create a `.atelier.md` at your project root:
 
-- **Target audience**: who uses the product
-- **Use cases**: what they're trying to get done
-- **Brand tone**: how the interface should feel
+```md
+# .atelier.md
+Target audience: ...
+Use cases: ...
+Brand tone: ...
+Design system: tokens live in src/styles/tokens.css
+```
 
-The skill will read it automatically on each invocation.
+The skill reads it automatically on each invocation.
+
+## What's inside
+
+```
+skills/
+├── atelier-design/        # parent: principles, references, context protocol
+│   ├── SKILL.md
+│   ├── references/        # deep material loaded on demand
+│   └── libraries/         # easing curves, palettes, font pairings
+├── atelier-layout/
+├── atelier-interaction/
+└── atelier-copy/
+evals/                     # test corpus for iterative improvement
+CHANGELOG.md               # what was absorbed, from where, when
+NOTICE.md                  # attribution to upstream skills
+```
 
 ## Evolution
 
-This skill is meant to grow by absorbing techniques from upstream skills (see `NOTICE.md` for current sources). The process:
+This skill grows by absorbing techniques from upstream sources. The process:
 
-1. Discover a new technique or upstream skill.
-2. Run the eval corpus with current vs. candidate.
-3. If the candidate wins, cherry-pick the specific material into the right reference file — never copy blindly.
-4. Log the change in `CHANGELOG.md` with attribution.
-5. Bump the `version` in the relevant `SKILL.md` frontmatter.
+1. Spot a new technique or upstream skill worth absorbing.
+2. Run `npm run eval` — baseline the current score.
+3. Cherry-pick the specific material into the right reference file.
+4. Run evals again — confirm improvement.
+5. Log in `CHANGELOG.md` with attribution, bump version in `SKILL.md`.
+6. `npm version patch && npm publish --access public && git push`
+
+## Evals
+
+```bash
+ANTHROPIC_API_KEY=sk-... npm run eval          # all cases
+npm run eval:layout                             # by mode
+npm run eval -- --id interaction-002 --verbose  # single case, full output
+```
 
 ## Inspirations
 
 - [anthropics/skills](https://github.com/anthropics/skills) — frontend-design, skill-creator
 - [pbakaus/impeccable](https://github.com/pbakaus/impeccable) — parent/child architecture, review format
-- [emilkowalski/skill](https://github.com/emilkowalski/skill) — animation decision framework, philosophy
+- [emilkowalski/skill](https://github.com/emilkowalski/skill) — animation decision framework
 - [jakubkrehel/make-interfaces-feel-better](https://github.com/jakubkrehel/make-interfaces-feel-better) — micro-detail catalog
 
 See `NOTICE.md` for full attribution.
