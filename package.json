@@ -1,5 +1,5 @@
 {
-  "name": "pwlk-atelier-design",
+  "name": "cami-design",
   "version": "0.1.9",
   "description": "Camille Pawlak's Claude Code design skill — layout, interaction, and copy modes for building and reviewing interfaces with intent.",
   "keywords": [
@@ -14,9 +14,9 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/PawlakCamille/pwlk-atelier-design.git"
+    "url": "https://github.com/PawlakCamille/cami-design.git"
   },
-  "homepage": "https://github.com/PawlakCamille/pwlk-atelier-design",
+  "homepage": "https://github.com/PawlakCamille/cami-design",
   "files": [
     "skills/",
     "scripts/",

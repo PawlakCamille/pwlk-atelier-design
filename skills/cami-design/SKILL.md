@@ -1,15 +1,15 @@
 ---
-name: atelier-design
+name: cami-design
 description: Full design review — runs context protocol then routes to layout, interaction, and/or copy based on what is needed.
 version: 0.1.0
 user-invocable: true
-argument-hint: "[atelier-design-layout|atelier-design-interaction|atelier-design-copy]"
+argument-hint: "[cami-design-layout|cami-design-interaction|cami-design-copy]"
 license: Apache 2.0. Inspired by anthropics/frontend-design, pbakaus/impeccable, emilkowalski/skill, and jakubkrehel/make-interfaces-feel-better. See NOTICE.md for attribution.
 ---
 
 # Atelier — Design Skill
 
-A personal, curated collection of design engineering knowledge. The parent skill holds shared principles and references; sub-skills (atelier-design-layout, atelier-design-interaction, atelier-design-copy) handle specific concerns.
+A personal, curated collection of design engineering knowledge. The parent skill holds shared principles and references; sub-skills (cami-design-layout, cami-design-interaction, cami-design-copy) handle specific concerns.
 
 ## Design System Protocol
 
@@ -23,7 +23,7 @@ Scan for:
 
 **Rule: propose adjustments using the existing system. Never override — suggest.** If a token exists for something, use it. If a value doesn't exist in the system, note the gap and propose adding it to the design system rather than hardcoding.
 
-This applies to all modes: atelier-design-layout, atelier-design-interaction, atelier-design-copy.
+This applies to all modes: cami-design-layout, cami-design-interaction, cami-design-copy.
 
 ---
 
@@ -37,7 +37,7 @@ Design skills produce generic output without project context. Before doing any d
 
 **Gathering order:**
 1. Check current instructions for a **Design Context** section — if present, proceed.
-2. Check `.atelier.md` at the project root — if present and sufficient, proceed.
+2. Check `.cami.md` at the project root — if present and sufficient, proceed.
 3. Otherwise ask the user directly for the three items above. Do **not** infer from the codebase — code tells you what was built, not who it's for.
 
 ---
@@ -48,11 +48,11 @@ Each mode is invokable on its own. Use this table to decide which to load.
 
 | Mode | When to use | Read |
 | --- | --- | --- |
-| **atelier-design-layout** | Alignment, sizing, spacing, visual hierarchy, rhythm, harmony | `../atelier-design-layout/SKILL.md` |
-| **atelier-design-interaction** | Animation, hover/press states, micro-interactions, delight, feel | `../atelier-design-interaction/SKILL.md` |
-| **atelier-design-copy** | Microcopy, labels, error messages, tone, clarity | `../atelier-design-copy/SKILL.md` |
+| **cami-design-layout** | Alignment, sizing, spacing, visual hierarchy, rhythm, harmony | `../cami-design-layout/SKILL.md` |
+| **cami-design-interaction** | Animation, hover/press states, micro-interactions, delight, feel | `../cami-design-interaction/SKILL.md` |
+| **cami-design-copy** | Microcopy, labels, error messages, tone, clarity | `../cami-design-copy/SKILL.md` |
 
-When the user describes a concern that maps cleanly to one mode, invoke that mode. If it spans multiple (e.g. "polish this page"), run them in order: **atelier-design-layout → atelier-design-interaction → atelier-design-copy**.
+When the user describes a concern that maps cleanly to one mode, invoke that mode. If it spans multiple (e.g. "polish this page"), run them in order: **cami-design-layout → cami-design-interaction → cami-design-copy**.
 
 ---
 

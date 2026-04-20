@@ -1,11 +1,11 @@
-# pwlk-atelier-design
+# cami-design
 
 Camille Pawlak's personal Claude Code design skill. A curated collection of principles, references, and modes for building and reviewing interfaces with intent.
 
 ## Install
 
 ```bash
-npm install -g pwlk-atelier-design
+npm install -g cami-design
 ```
 
 That's it. Four slash commands are linked into Claude Code automatically.
@@ -13,20 +13,20 @@ That's it. Four slash commands are linked into Claude Code automatically.
 ## Usage
 
 ```
-/atelier-design        — load shared principles, route to a mode
-/atelier-design-layout        — alignment, sizing, spacing, visual hierarchy
-/atelier-design-interaction   — animation, hover/press states, micro-interactions
-/atelier-design-copy          — microcopy, labels, errors, tone
+/cami-design        — load shared principles, route to a mode
+/cami-design-layout        — alignment, sizing, spacing, visual hierarchy
+/cami-design-interaction   — animation, hover/press states, micro-interactions
+/cami-design-copy          — microcopy, labels, errors, tone
 ```
 
 Or let the skills auto-trigger — the frontmatter descriptions are tuned to activate on related work.
 
 ## Design Context
 
-Design work produces generic output without project context. Before the first run, create a `.atelier.md` at your project root:
+Design work produces generic output without project context. Before the first run, create a `.cami.md` at your project root:
 
 ```md
-# .atelier.md
+# .cami.md
 Target audience: ...
 Use cases: ...
 Brand tone: ...
@@ -39,13 +39,13 @@ The skill reads it automatically on each invocation.
 
 ```
 skills/
-├── atelier-design/        # parent: principles, references, context protocol
+├── cami-design/        # parent: principles, references, context protocol
 │   ├── SKILL.md
 │   ├── references/        # deep material loaded on demand
 │   └── libraries/         # easing curves, palettes, font pairings
-├── atelier-design-layout/
-├── atelier-design-interaction/
-└── atelier-design-copy/
+├── cami-design-layout/
+├── cami-design-interaction/
+└── cami-design-copy/
 evals/                     # test corpus for iterative improvement
 CHANGELOG.md               # what was absorbed, from where, when
 NOTICE.md                  # attribution to upstream skills

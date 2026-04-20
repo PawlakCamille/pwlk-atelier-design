@@ -1,5 +1,5 @@
 ---
-name: atelier-design-copy
+name: cami-design-copy
 description: Microcopy, labels, errors, tone. Use when wording is vague, passive, or does not tell the user what to do.
 version: 0.1.0
 user-invocable: true
@@ -8,7 +8,7 @@ argument-hint: "[target]"
 
 ## MANDATORY PREPARATION
 
-Invoke `atelier-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding. For this mode you also need:
+Invoke `cami-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding. For this mode you also need:
 
 - **Voice / tone**: how does the product speak? (formal, friendly, sharp, playful, neutral)
 - **Audience literacy**: technical users? consumers? mixed?
@@ -130,7 +130,7 @@ Findings as `Before | After | Why` tables, grouped by dimension. Cite the specif
 
 ## References
 
-- `../atelier-design/references/craft.md` (for tone and intent)
+- `../cami-design/references/craft.md` (for tone and intent)
 
 ## Human-facing writing note
 

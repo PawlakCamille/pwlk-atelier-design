@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 
-const SKILLS = ["atelier-design", "atelier-design-layout", "atelier-design-interaction", "atelier-design-copy"];
+const SKILLS = ["cami-design", "cami-design-layout", "cami-design-interaction", "cami-design-copy"];
 const targetDir = path.join(os.homedir(), ".claude", "skills");
 
 let removed = [];
@@ -23,6 +23,6 @@ for (const skill of SKILLS) {
 }
 
 if (removed.length) {
-  console.log(`\n✦ pwlk-atelier-design uninstalled`);
+  console.log(`\n✦ cami-design uninstalled`);
   console.log(`  Removed: ${removed.join(", ")}\n`);
 }

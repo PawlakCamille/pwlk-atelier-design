@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Eval runner for pwlk-atelier-design
+ * Eval runner for cami-design
  * Requires: ANTHROPIC_API_KEY in environment
  * Usage: npm run eval
  *        npm run eval -- --mode copy
@@ -39,7 +39,7 @@ function loadSkill(mode) {
 }
 
 function loadParentSkill() {
-  const p = path.join(SKILLS_PATH, "atelier-design", "SKILL.md");
+  const p = path.join(SKILLS_PATH, "cami-design", "SKILL.md");
   return fs.readFileSync(p, "utf8");
 }
 
@@ -127,7 +127,7 @@ async function run() {
     process.exit(0);
   }
 
-  console.log(`\n✦ pwlk-atelier-design evals`);
+  console.log(`\n✦ cami-design evals`);
   console.log(`  Running ${cases.length} case${cases.length > 1 ? "s" : ""}...\n`);
 
   const results = [];

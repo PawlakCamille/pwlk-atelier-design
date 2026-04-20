@@ -1,5 +1,5 @@
 ---
-name: atelier-design-layout
+name: cami-design-layout
 description: Spacing, alignment, visual hierarchy, rhythm. Use when things feel off, crowded, or unbalanced.
 version: 0.1.0
 user-invocable: true
@@ -8,7 +8,7 @@ argument-hint: "[target]"
 
 ## MANDATORY PREPARATION
 
-Invoke `atelier-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding.
+Invoke `cami-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding.
 
 ---
 
@@ -28,7 +28,7 @@ Compose layouts that feel intentional: clear hierarchy, consistent spacing, opti
 1. Identify the spacing scale in use (Tailwind default, custom tokens, etc.).
 2. Identify the typographic scale and line-height conventions.
 3. Note the grid / breakpoints.
-4. Read `../atelier-design/references/spacing-layout.md` for the deep material.
+4. Read `../cami-design/references/spacing-layout.md` for the deep material.
 
 ## Review Dimensions
 
@@ -76,6 +76,6 @@ Present findings grouped by dimension, each as a `Before | After | Why` table. O
 
 ## References
 
-- `../atelier-design/references/spacing-layout.md`
-- `../atelier-design/references/typography.md` (for vertical rhythm, line-height)
-- `../atelier-design/references/accessibility.md` (for hit areas, contrast)
+- `../cami-design/references/spacing-layout.md`
+- `../cami-design/references/typography.md` (for vertical rhythm, line-height)
+- `../cami-design/references/accessibility.md` (for hit areas, contrast)

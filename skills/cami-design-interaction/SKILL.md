@@ -1,5 +1,5 @@
 ---
-name: atelier-design-interaction
+name: cami-design-interaction
 description: Hover states, animation, micro-interactions, motion. Use when something feels flat, static, or off-tempo.
 version: 0.1.0
 user-invocable: true
@@ -8,7 +8,7 @@ argument-hint: "[target]"
 
 ## MANDATORY PREPARATION
 
-Invoke `atelier-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding.
+Invoke `cami-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding.
 
 ---
 
@@ -27,7 +27,7 @@ Tune the parts of an interface that respond to the user: hover, focus, press, en
 
 1. Check `package.json` for motion libraries (`motion`, `framer-motion`, React Spring, etc.).
 2. Identify existing easing and duration conventions in the codebase.
-3. Read `../atelier-design/references/motion.md` and `../atelier-design/references/interaction.md`.
+3. Read `../cami-design/references/motion.md` and `../cami-design/references/interaction.md`.
 
 ## The Animation Decision Framework
 
@@ -113,6 +113,6 @@ Findings as `Before | After | Why` tables, grouped by dimension. Skip dimensions
 
 ## References
 
-- `../atelier-design/references/motion.md`
-- `../atelier-design/references/interaction.md`
-- `../atelier-design/libraries/easing-curves.json`
+- `../cami-design/references/motion.md`
+- `../cami-design/references/interaction.md`
+- `../cami-design/libraries/easing-curves.json`
