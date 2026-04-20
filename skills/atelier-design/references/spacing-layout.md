@@ -115,6 +115,32 @@ img {
 <img className="outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
 ```
 
+## Long-form Layouts
+
+### Sticky Section Headers
+
+On settings pages, profile pages, or any long-form layout organized into titled sections: if a section's content can exceed the viewport height, the section title should stick to the top of the scroll container. Without it, the user scrolls into the middle of a section with no anchor — they've lost context of where they are.
+
+```css
+.section-title {
+  position: sticky;
+  top: var(--header-height, 0px); /* offset by any fixed top nav */
+  z-index: 1;
+  background: var(--surface-page); /* must match page background — sticky without bg is invisible */
+}
+```
+
+**When to apply:** any section where content height can exceed ~80vh. On shorter sections it does nothing, so it's safe to apply consistently across all section headers.
+
+**Common mistake:** forgetting the background. A sticky element with a transparent background lets content scroll behind it — worse than no sticky at all.
+
+**Tailwind:**
+```tsx
+<h2 className="sticky top-0 z-10 bg-[--surface-page] py-3 text-sm font-medium text-secondary">
+  Security
+</h2>
+```
+
 ## Vertical Rhythm
 
 Align to a baseline grid. Body text leading defines the unit; spacing between blocks follows that unit (1x, 2x, 3x).
