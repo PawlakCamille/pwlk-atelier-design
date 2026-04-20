@@ -1,6 +1,6 @@
 ---
 name: atelier-design
-description: Camille Pawlak's curated design skill. Shared principles, anti-patterns, and context protocol for building and reviewing interfaces with intent. Use when building UI components, reviewing frontend code, or invoking any of the specialized modes (atelier-design-layout, atelier-design-interaction, atelier-design-copy). Triggers on UI design work, polish, "feels off", micro-details, visual hierarchy, alignment, spacing, motion, microcopy.
+description: Full design review — runs context protocol then routes to layout, interaction, and/or copy based on what is needed.
 version: 0.1.0
 user-invocable: true
 argument-hint: "[atelier-design-layout|atelier-design-interaction|atelier-design-copy]"

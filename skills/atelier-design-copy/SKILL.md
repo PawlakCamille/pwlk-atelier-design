@@ -1,6 +1,6 @@
 ---
 name: atelier-design-copy
-description: Microcopy, labels, error messages, empty states, tone, and clarity. Use when the user mentions copy, microcopy, wording, labels, error messages, tone, voice, confusing text, or wants clearer UX writing.
+description: Microcopy, labels, errors, tone. Use when wording is vague, passive, or does not tell the user what to do.
 version: 0.1.0
 user-invocable: true
 argument-hint: "[target]"

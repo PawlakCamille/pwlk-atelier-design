@@ -1,6 +1,6 @@
 ---
 name: atelier-design-interaction
-description: Animation, hover and press states, micro-interactions, and moments of delight. Use when the user mentions animation, transitions, hover effects, click feedback, motion, micro-interactions, delight, feel, "make it feel better", or interactive polish.
+description: Hover states, animation, micro-interactions, motion. Use when something feels flat, static, or off-tempo.
 version: 0.1.0
 user-invocable: true
 argument-hint: "[target]"
