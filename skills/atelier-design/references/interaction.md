@@ -1,0 +1,113 @@
+# Interaction
+
+Deep reference for interactive states and feedback. Loaded on demand.
+
+## Press Feedback
+
+- `scale(0.96)` on `:active` is the sweet spot for buttons.
+- **Never** below `0.95` — feels exaggerated, like a cartoon.
+- Pair with `transition: scale 100ms ease-out` for the release.
+- Add a `static` prop to disable when motion would distract.
+
+## Hover States
+
+- Subtle. Hover is not a celebration — it's a confirmation that an element is interactive.
+- Common patterns: background shift (~5-10% lightness), subtle shadow lift, color deepen.
+- Avoid: scaling on hover (feels unstable), color shifts > 15% (too dramatic).
+- **Gate hover animations behind a media query** — touch devices trigger hover on tap, causing false positives:
+  ```css
+  @media (hover: hover) and (pointer: fine) {
+    .element:hover { transform: scale(1.02); }
+  }
+  ```
+
+## Focus States
+
+- Visible, always. Never `outline: none` without a replacement.
+- Match the brand but stay distinct from hover.
+- Use `:focus-visible` to show rings only on keyboard nav, not mouse clicks.
+
+## Hit Areas
+
+- Minimum 40×40px regardless of visible size.
+- Extend via pseudo-element:
+  ```css
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -8px; /* expands hit area */
+  }
+  ```
+- Never overlap hit areas of adjacent interactive elements.
+
+## Loading States
+
+- Skeletons > spinners for content that has known structure.
+- Spinner only when the action is instant-feeling (< 1s) and you just need to reassure.
+- Optimistic UI when safe — update immediately, roll back on error with a clear message.
+- **Disable the button while loading** to prevent double-submission — re-enable on success or error.
+
+## Disabled States
+
+- Reduce opacity to ~50%.
+- Remove hover/press affordances — don't tease interactivity that isn't there.
+- If possible, explain **why** it's disabled (tooltip or inline hint). Never leave the user guessing.
+
+## Blur Trick
+
+When a crossfade between two states feels off despite trying different easings and durations, add subtle `filter: blur(2px)` during the transition. Without blur, you see two distinct objects overlapping — blur bridges the visual gap by blending them into a single perceived transformation.
+
+```css
+.button-content {
+  transition: filter 200ms ease, opacity 200ms ease;
+}
+.button-content.transitioning {
+  filter: blur(2px);
+  opacity: 0.7;
+}
+```
+
+Keep blur under 20px. Heavy blur is expensive, especially in Safari.
+
+## Tooltip Behaviour
+
+- First tooltip: delay before appearing (prevents accidental activation on cursor pass)
+- Subsequent tooltips (hovering adjacent elements while one is open): **instant, no animation**
+
+```css
+.tooltip { transition: transform 125ms ease-out, opacity 125ms ease-out; }
+.tooltip[data-instant] { transition-duration: 0ms; }
+```
+
+This makes toolbars and nav feel significantly faster without removing the protective delay.
+
+## Toggle & Selection States
+
+- Toggle switches: smooth slide + color transition (200–300ms)
+- Checkbox: scale pulse on check (brief `scale(1.1)` → `scale(1)`) with opacity fade
+- On mobile: haptic feedback on toggle/selection change
+
+## Drag & Drop
+
+- **Lift effect on drag start**: `scale(1.02)` + shadow increase — signals the element is "picked up"
+- **Drop zone highlight**: subtle background or border change when dragging over a valid target
+- **Snap on drop**: brief spring animation settling into final position
+- **Undo escape hatch**: toast with undo action if the user drops in the wrong place
+
+## Haptics (mobile/native)
+
+- Light tap on primary action success
+- Selection change on toggle / picker
+- Warning on destructive confirm
+- Don't haptic-spam — frequent haptics become noise fast
+
+## Keyboard
+
+- Every interactive element reachable via Tab.
+- Standard shortcuts respected (Enter to submit, Esc to close, Arrow keys in lists).
+- Focus trap inside modals; restore focus to trigger on close.
+
+## Attribution
+
+Synthesized from: pbakaus/impeccable `interaction-design.md`, jakubkrehel/make-interfaces-feel-better, emilkowalski/skill.

@@ -1,0 +1,37 @@
+{
+  "description": "Curated easing curves. Pick by scenario, not by aesthetic preference.",
+  "curves": {
+    "ease-out-quart": {
+      "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+      "use_for": "entering elements, default UI reveal"
+    },
+    "ease-out-soft": {
+      "value": "cubic-bezier(0.2, 0, 0, 1)",
+      "use_for": "icon morphs, cross-fades, smooth transitions"
+    },
+    "ease-in-out-natural": {
+      "value": "cubic-bezier(0.65, 0, 0.35, 1)",
+      "use_for": "movement across the screen, panning"
+    },
+    "ease-in-exit": {
+      "value": "cubic-bezier(0.4, 0, 1, 1)",
+      "use_for": "exiting elements"
+    },
+    "spring-snappy": {
+      "library": "framer-motion / motion",
+      "value": { "type": "spring", "duration": 0.3, "bounce": 0 },
+      "use_for": "default spring. bounce always 0 unless explicitly playful"
+    },
+    "spring-playful": {
+      "library": "framer-motion / motion",
+      "value": { "type": "spring", "duration": 0.5, "bounce": 0.25 },
+      "use_for": "rare delight moments only"
+    }
+  },
+  "durations_ms": {
+    "micro": [100, 150],
+    "state_change": [200, 250],
+    "modal_enter": [250, 350],
+    "avoid_above": 400
+  }
+}

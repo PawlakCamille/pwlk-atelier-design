@@ -1,0 +1,5 @@
+{
+  "skill_name": "atelier-design",
+  "description": "Eval corpus. Add before/after test cases here as you build the skill. Each eval is a prompt Claude runs with and without the skill; you compare the outputs to decide if a change improved quality.",
+  "evals": []
+}
