@@ -78,6 +78,7 @@ Every animation must answer "why does this animate?"
 - `will-change` only on `transform`, `opacity`, `filter` — GPU-compositable.
 - **Never** `will-change: all`.
 - Only add `will-change` when you observe first-frame stutter. Overuse destroys performance.
+- **Jittery mid-animation?** Add `will-change: transform` to promote the element to its own compositor layer. Different from first-frame stutter — this is for animations that feel shaky *during* playback, usually caused by concurrent repaints on the same layer.
 - **CSS variables on parents are expensive in animations.** Changing `--swipe-amount` on a container triggers style recalculation on all children. Update `transform` directly on the element instead:
   ```js
   // Bad — recalculates all children
