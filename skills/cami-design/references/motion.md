@@ -162,10 +162,22 @@ Animate `height` / `width` to/from `auto` directly — kills the `max-height: 99
 
 Chrome 129+, Safari 18.2+, no Firefox as of April 2026. Falls back to a snap instead of animation — safe as progressive enhancement.
 
+### SVG Transforms (Safari fix)
+Safari miscalculates `transform-origin` on direct `<path>` / `<circle>` / `<rect>` elements. Always wrap animated SVG shapes in a `<g>` and set:
+
+```css
+g.animated {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+```
+
+Without this, scale and rotate animations on SVG shapes fly off-center in Safari while looking fine in Chrome.
+
 ## Accessibility
 
 Respecting `prefers-reduced-motion` is an accessibility requirement, not optional. Always provide a non-animated fallback. The snippet lives in `interaction/SKILL.md` — apply it globally at the root level.
 
 ## Attribution
 
-Synthesized from: emilkowalski/skill, jakubkrehel/make-interfaces-feel-better `animations.md`, pbakaus/impeccable `motion-design.md`, MDN web docs (`interpolate-size`, `calc-size()`).
+Synthesized from: emilkowalski/skill, jakubkrehel/make-interfaces-feel-better `animations.md`, pbakaus/impeccable `motion-design.md`, MDN web docs (`interpolate-size`, `calc-size()`), vercel-labs/web-interface-guidelines (SVG Safari fix).

@@ -6,6 +6,29 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.12 — 2026-04-21 — Forms, mobile/touch, typographic characters, dark-mode native UI, content resilience
+
+Large absorption pass from Vercel Labs `web-interface-guidelines`.
+
+### Added
+- **New `references/forms.md`** — input attributes (`autocomplete`, `type`/`inputmode`, `spellcheck`), don't-block-paste, label patterns (inc. checkbox/radio hit target), submit behavior (don't pre-disable, disable during request), inline errors with focus-first, placeholder ellipsis + example patterns, unsaved-changes warnings. Wired into parent SKILL's references table, `cami-design-interaction`, and `cami-design-copy`.
+- `references/interaction.md` — new *Mobile & Touch* section (`touch-action: manipulation`, `-webkit-tap-highlight-color`, `overscroll-behavior: contain`, drag selection/`inert`, `autoFocus` rules). New loading minimum-duration rule (show-delay + min visible time).
+- `references/typography.md` — new *Typographic Characters* section (`…` vs `...`, curly quotes, `&nbsp;` for glued terms). Added `preconnect` bullet for font/asset CDNs.
+- `references/color.md` — new *Native Browser UI* section (`color-scheme`, `<meta name="theme-color">`, Windows `<select>` bg/color fix).
+- `references/spacing-layout.md` — new *Safe Areas* section (`env(safe-area-inset-*)` for mobile notch), new *Content Resilience* section (truncate/line-clamp/break-words + `min-w-0` flex gotcha + UGC resilience), new *Anchored Headings* section (`scroll-margin-top` under sticky headers).
+- `references/motion.md` — SVG Safari transform fix (`transform-box: fill-box` on `<g>` wrapper).
+
+### Deliberately skipped
+- Forms sub-skill (too heavy — chose reference-only)
+- URL-as-state, deep-linking, hydration, i18n — architectural, out of scope for polish
+- Image/CLS rules — engineering scope
+- Title Case headings — conflicts with existing sentence-case default in `cami-design-copy`
+
+### Sources
+- vercel-labs/web-interface-guidelines (command.md, full rule set reviewed)
+
+---
+
 ## 0.1.11 — 2026-04-20 — Modern CSS polish primitives
 
 ### Added

@@ -93,6 +93,30 @@ Heavy use of `rgba` / `hsla` / opacity is usually a sign of an incomplete palett
 - Avoid rainbow gradients in serious UI — they read as "AI slop" or marketing.
 - Text gradients: skip them in product UI. Keep for marketing moments.
 
+## Native Browser UI
+
+Several native UI elements render in system defaults unless you tell the browser otherwise. For polish — especially when shipping dark mode — set these explicitly.
+
+- **`color-scheme`** on `<html>` tells the browser the page's theme. Affects native scrollbars (Firefox/Safari), default `<input>` / `<select>` styling, autofill colors, and form validation popups. Without it, a dark page shows **bright white scrollbars** and form controls that break the theme.
+  ```css
+  :root { color-scheme: light; }
+  [data-theme="dark"] { color-scheme: dark; }
+  /* If you support both automatically: */
+  :root { color-scheme: light dark; }
+  ```
+- **`<meta name="theme-color">`** sets mobile browser chrome (iOS Safari address bar, Chrome Android nav) to match your background. **Worth setting even on light-only products** — match your page background exactly so the chrome blends in.
+  ```html
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  ```
+- **Windows native `<select>` dark mode bug** — renders with broken contrast. Always set `background-color` and `color` explicitly on native `<select>`.
+  ```css
+  select {
+    background-color: var(--surface);
+    color: var(--text);
+  }
+  ```
+
 ## Attribution
 
-Synthesized from: pbakaus/impeccable `color-and-contrast.md`, anthropics/frontend-design, MDN web docs (`::selection`, relative color syntax).
+Synthesized from: pbakaus/impeccable `color-and-contrast.md`, anthropics/frontend-design, MDN web docs (`::selection`, relative color syntax), vercel-labs/web-interface-guidelines (native browser UI rules).
