@@ -114,6 +114,10 @@ Defaulting to dark for aesthetics and light for safety are both lazy. Choose, th
 
 Mixing icon libraries with different stroke widths (1.5px vs 2px) in the same UI. Lock the whole product to one library and one weight.
 
+## Default Native Scrollbars on Inset Containers
+
+Sidebars, modal bodies, command menus, and dropdowns rendering with the OS default scrollbar (chunky, untoken'd, often a different gray than the rest of the UI). It signals "design stopped at the container edge." Two CSS rules tie scrollbars into the design system. See `spacing-layout.md` → *Tame Native Scrollbars*.
+
 ## The Test
 
 If someone said "AI made this," would you believe them immediately? If yes, change it.
