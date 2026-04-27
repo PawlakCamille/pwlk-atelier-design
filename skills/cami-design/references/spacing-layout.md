@@ -136,6 +136,34 @@ Reserve space for the scrollbar on scrollable containers so content doesn't shif
 }
 ```
 
+## Tame Native Scrollbars
+
+Default scrollbars (especially Windows/Chrome) are visually loud and break the integrity of a tuned UI. The standards two-liner fixes it:
+
+```css
+.scrollable-region {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+```
+
+Always tie the thumb color to a design token (`--border`, `--muted`, whatever your system calls the subtle stroke color). Hardcoding `gray` means the scrollbar drifts from the rest of the UI when the palette shifts (dark mode, brand re-tint).
+
+**Apply to inset scroll containers**, not the document. A blanket `*` rule flattens the page's main scrollbar too, which is the one place a normal-width control still helps usability — thin scrollbars are harder to grab and the position indicator becomes less legible. Scope to sidebars, modal bodies, command menus, dropdowns, code blocks, table wrappers.
+
+**Browser support.** Both properties are baseline since Chrome 121 (Jan 2024) and Safari 18.2 (Dec 2024). For most product codebases in 2026, no fallback needed. If your support contract reaches pre-2024 Safari, add the prefixed version:
+
+```css
+.scrollable-region::-webkit-scrollbar { width: 5px; }
+.scrollable-region::-webkit-scrollbar-track { background: transparent; }
+.scrollable-region::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 5px;
+}
+```
+
+**Pair with `scrollbar-gutter: stable`** on containers where the scrollbar appears and disappears (modal bodies, dynamic lists), to prevent horizontal content shift.
+
 ## Long-form Layouts
 
 ### Sticky Section Headers
@@ -251,4 +279,4 @@ Align to a baseline grid. Body text leading defines the unit; spacing between bl
 
 ## Attribution
 
-Synthesized from: pbakaus/impeccable `spatial-design.md`, jakubkrehel/make-interfaces-feel-better `surfaces.md`, emilkowalski/skill, zenobi-us/dotfiles `basic-design-principles` (elevation consistency rule), MDN web docs (`scrollbar-gutter`), vercel-labs/web-interface-guidelines (safe areas, content resilience, anchored headings).
+Synthesized from: pbakaus/impeccable `spatial-design.md`, jakubkrehel/make-interfaces-feel-better `surfaces.md`, emilkowalski/skill, zenobi-us/dotfiles `basic-design-principles` (elevation consistency rule), MDN web docs (`scrollbar-gutter`), vercel-labs/web-interface-guidelines (safe areas, content resilience, anchored headings), rauno freiberg + chánh đại on scrollbar styling (tame native scrollbars).
