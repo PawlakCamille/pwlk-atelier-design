@@ -84,7 +84,8 @@ Every animation must answer "why does this animate?"
 - **Never** `will-change: all`.
 - Only add `will-change` when you observe first-frame stutter. Overuse destroys performance.
 - **Jittery mid-animation?** Add `will-change: transform` to promote the element to its own compositor layer. Different from first-frame stutter — this is for animations that feel shaky *during* playback, usually caused by concurrent repaints on the same layer.
-- **`backdrop-blur` on scrolling containers** forces re-compositing on every scroll frame. Limit it to `position: fixed` or `sticky` elements only.
+- **`backdrop-blur` on scrolling containers** forces re-compositing on every scroll frame. Limit it to `position: fixed` or `sticky` elements only. **Cap radius at ~8px**, never animate it on large surfaces, never in loops.
+- **Reach for blur last.** Try `opacity` and `translate` first — they're free on the compositor. Use blur only when the effect genuinely needs it.
 - **CSS variables on parents are expensive in animations.** Changing `--swipe-amount` on a container triggers style recalculation on all children. Update `transform` directly on the element instead:
   ```js
   // Bad — recalculates all children
@@ -93,6 +94,44 @@ Every animation must answer "why does this animate?"
   element.style.transform = `translateY(${distance}px)`;
   ```
 - **CSS animations beat JS under load.** CSS animations run off the main thread; Framer Motion's `x`/`y` shorthand props use `requestAnimationFrame` and drop frames when the browser is busy. Use `transform: "translateX()"` string syntax for hardware acceleration in Framer Motion when smoothness matters.
+
+### FLIP for layout-like motion
+
+To animate something that looks like a layout change (reorder, expand, list reflow), never animate `width`/`height`/`top`/`margin` — they trigger layout per frame. Measure first, apply final state, invert with transform, play.
+
+```js
+const first = el.getBoundingClientRect();
+el.classList.add('moved');
+const last = el.getBoundingClientRect();
+el.style.transform = `translate(${first.left - last.left}px, ${first.top - last.top}px)`;
+requestAnimationFrame(() => {
+  el.style.transition = 'transform 0.3s';
+  el.style.transform = '';
+});
+```
+
+The animation runs on the compositor while reading as layout. View Transitions API does this for navigation; FLIP for in-page rearrangement.
+
+**Batch reads before writes.** Reading layout (`getBoundingClientRect`, `offsetTop`) after a write forces synchronous reflow. Group all reads, then all writes.
+
+## Scroll-linked Motion
+
+- **Use Scroll/View Timelines, not `scroll` listeners.** Listeners fire dozens of times per tick and force sync layout/paint. The CSS timeline API runs on the compositor.
+  ```css
+  .reveal {
+    animation: fade-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 30%;
+  }
+  ```
+  Baseline: Chrome 115+, Safari 26+, Firefox behind a flag. Write keyframes so the final state is the rest state — unsupported browsers stay there.
+
+- **Pause off-screen animations with IntersectionObserver.** Looping motion (carousels, marquees, ambient backgrounds) running off-screen burns battery and the main thread.
+  ```js
+  new IntersectionObserver(([e]) =>
+    el.style.animationPlayState = e.isIntersecting ? 'running' : 'paused'
+  ).observe(el);
+  ```
 
 ## Icon Animations
 
@@ -187,4 +226,4 @@ Respecting `prefers-reduced-motion` is an accessibility requirement, not optiona
 
 ## Attribution
 
-Synthesized from: emilkowalski/skill, jakubkrehel/make-interfaces-feel-better `animations.md`, pbakaus/impeccable `motion-design.md`, MDN web docs (`interpolate-size`, `calc-size()`), vercel-labs/web-interface-guidelines (SVG Safari fix).
+Synthesized from: emilkowalski/skill, jakubkrehel/make-interfaces-feel-better `animations.md`, pbakaus/impeccable `motion-design.md`, MDN web docs (`interpolate-size`, `calc-size()`), vercel-labs/web-interface-guidelines (SVG Safari fix), fixing-motion-performance skill (FLIP, scroll timelines, blur ordering).
