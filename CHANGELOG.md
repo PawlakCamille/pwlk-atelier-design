@@ -6,6 +6,20 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.18 — 2026-04-29 — FLIP, scroll-linked motion, blur ordering
+
+Three additions to `motion.md` after reviewing the `fixing-motion-performance` skill. Two other skills (`interface-design`, `baseline-ui`, `redesign-existing-projects`) were reviewed in the same pass and rejected — already covered or out of scope.
+
+### Added
+- `references/motion.md > Performance` — new bullet on reaching for blur last (try `opacity`/`translate` first, blur is paint-heavy). Existing `backdrop-blur` bullet extended with the cap rule (~8px max, never on large surfaces, never in loops).
+- `references/motion.md > Performance` — new sub-section *FLIP for layout-like motion*. Covers the measure-first / animate-via-transform pattern for reorder, expand, and reflow effects. Includes the "batch reads before writes" rule to avoid synchronous reflow.
+- `references/motion.md` — new top-level section *Scroll-linked Motion*. Two rules: prefer Scroll/View Timelines over `scroll` listeners (compositor vs main-thread), and use IntersectionObserver to pause looping motion when off-screen.
+
+### Sources
+- `fixing-motion-performance` skill — FLIP pattern, scroll timeline preference, blur ordering and cap.
+
+---
+
 ## 0.1.17 — 2026-04-27 — Tame native scrollbars
 
 Default OS scrollbars on inset containers (sidebars, modal bodies, command menus, dropdowns) read as "design stopped at the container edge." Two CSS rules fix it and tie scrollbars into the design system.
