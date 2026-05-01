@@ -212,9 +212,22 @@ Requires `<meta name="viewport" content="viewport-fit=cover">` to take effect.
 
 ## Content Resilience
 
-Layouts must survive text longer or shorter than expected. User names, titles, descriptions, tags — any user-generated content can be 1 character or 200.
+Layouts must survive across three axes: **length** (1 char to 200), **viewport** (360px to 1920px+), **locale** (text expands across languages). Any single axis can break a layout that looks fine on the others.
 
-### Truncation
+### Choose the behavior on purpose
+
+| Surface | Behavior |
+|---|---|
+| Nav item, table cell, breadcrumb | Truncate (single line + ellipsis) |
+| Description, paragraph, alert body | Wrap (never truncate) |
+| URL, token, ID, code | `break-anywhere` or horizontal scroll |
+| Button label, CTA, status pill, tab | Never truncate; fit container to label |
+
+### Truncation needs discoverability
+
+If the truncated content is identifying or actionable (names, IDs, amounts, file paths, errors), expose the full value via tooltip, click-to-expand, or detail panel. Decorative truncation can drop without recovery.
+
+### CSS reminders
 
 ```tsx
 /* Single line */
@@ -225,6 +238,9 @@ Layouts must survive text longer or shorter than expected. User names, titles, d
 
 /* Long unbroken strings (URLs, tokens) wrap instead of overflowing */
 <code className="break-words">{longToken}</code>
+
+/* Last resort for unbreakable strings that still overflow */
+<code className="[overflow-wrap:anywhere]">{token}</code>
 ```
 
 ### Identifying data in destructive confirmations
@@ -252,7 +268,24 @@ Flex children default to `min-width: auto`, so `truncate` on a flex child forces
 </div>
 ```
 
-Test every layout at both extremes: a 3-character value and a 200-character value. Neither should break the layout.
+### Audit matrix
+
+Test combinations across these axes, not just length:
+
+- **Lengths**: 3-char, expected, 200-char, plus one unbreakable token
+- **Viewports**: 360, 768, 1280
+- **Locales**: at least one ~30% longer than your source
+
+Failure modes to flag:
+- Layout breaks (overflow, push-out, broken row alignment)
+- Critical info hidden silently with no recovery
+- Truncation that strips most meaningful content (container too narrow)
+
+### Locale expansion budget
+
+Static labels (nav, buttons, tabs, table headers) need **30–50% expansion headroom** (FR ~+25%, DE ~+50% vs EN). Plan width with the longest expected locale, not the source.
+
+Example: "Settings" (EN, 8) → "Paramètres" (FR, 11) → "Einstellungen" (DE, 13).
 
 ## Card Layout
 

@@ -6,6 +6,23 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.19 — 2026-05-01 — Content resilience: length × viewport × locale
+
+Recurring polish miss in product QA: text behavior under length and space variation. The existing Content Resilience section in `spacing-layout.md` had the CSS techniques but not the review methodology. This expansion turns it from snippets into an audit framework.
+
+### Added
+- **3-axis framing** in the section intro — length (1 char to 200), viewport (360px to 1920px+), locale (text expands across languages). Surfaces only pass when no single axis breaks the layout.
+- **Decision matrix** mapping surface type to text behavior (truncate / wrap / break-anywhere / never truncate). The audit answer for "what should this text do here" is now a lookup, not a judgement call.
+- **Discoverability rule** — truncated identifying or actionable content (names, IDs, amounts, errors) must expose the full value via tooltip, click-to-expand, or detail panel. Decorative truncation can drop without recovery.
+- **Audit matrix** replacing the old "test 3 chars vs 200 chars" line. Now tests combinations across length × viewport × locale, with explicit failure modes (layout breaks, silent info loss, over-truncation).
+- **Locale expansion budget** — static labels need 30–50% headroom (FR ~+25%, DE ~+50% vs EN). Width planning anchored on the longest expected locale.
+- One CSS snippet added: `[overflow-wrap:anywhere]` as a last resort for unbreakable strings that defeat `break-words`.
+
+### Why
+Text behavior is a recurring QA failure that nothing in the skill explicitly audited. Reviews caught the symptoms (weird wrap, silent truncation) without naming the rule. This makes the audit deliberate.
+
+---
+
 ## 0.1.18 — 2026-04-29 — FLIP, scroll-linked motion, blur ordering
 
 Three additions to `motion.md` after reviewing the `fixing-motion-performance` skill. Two other skills (`interface-design`, `baseline-ui`, `redesign-existing-projects`) were reviewed in the same pass and rejected — already covered or out of scope.
