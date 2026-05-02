@@ -6,6 +6,23 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.20 — 2026-05-03 — Motion craft: blur+motion, close-subtlety, animate-inner
+
+Three small craft principles absorbed from `Jakubantalik/transitions-dev` (the agent-skill packaging of the transitions.dev snippet collection).
+
+### Added
+- `references/motion.md > Enter Animations` — new bullet: pair small movement with small blur (2-3px). Short translates and scales need a blur companion to read as motion; without it 8px distances feel like nothing happened. Pattern is consistent across the transitions-dev library.
+- `references/motion.md > Exit Animations` — new bullet: close on a subtler scale than the open started from (e.g. opens from `scale(0.97)`, closes toward `scale(0.99)`). Exits shouldn't "pop" as much as entrances did.
+- `references/motion.md > Specificity` — new bullet: animate the inner piece, not the container. Badge dot, not trigger button. Page sections, not wrapper. The changing thing should be the thing that moves.
+
+### Reviewed and not absorbed
+- The 9 transition snippets themselves (card resize, number pop-in, notification badge, text swap, dropdown, modal, panel reveal, page slide, icon swap) — they're a paste-ready library, not polish-layer principles. cami-design's scope is review, not snippet distribution.
+- The shared `:root` block with ~50 tuned variables — that's their design system, not a principle.
+- The "transition: all" anti-pattern from their Common Mistakes — already in cami's Specificity section.
+- The reflow trick (`void el.offsetHeight`) — engineering implementation detail.
+
+---
+
 ## 0.1.19 — 2026-05-01 — Content resilience: length × viewport × locale
 
 Recurring polish miss in product QA: text behavior under length and space variation. The existing Content Resilience section in `spacing-layout.md` had the CSS techniques but not the review methodology. This expansion turns it from snippets into an audit framework.
