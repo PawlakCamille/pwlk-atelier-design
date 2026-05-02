@@ -55,12 +55,14 @@ Every animation must answer "why does this animate?"
 
 - **Split and stagger.** Don't animate one container. Break content into semantic chunks, stagger each with ~50ms delay — beyond that it feels slow, not polished. CSS-only: set `--index` on each item and use `animation-delay: calc(var(--index) * 50ms)`.
 - Nothing should appear from `scale(0)`. Start at `scale(0.95)` + `opacity: 0`. Real objects don't materialize from nothing.
+- **Pair small movement with small blur.** A 2-3px blur companion to a short translate or scale makes brief motion read clearly. Without it, 8px distances look like "nothing happened."
 
 ## Exit Animations
 
 - Softer than enters.
 - Prefer small fixed `translateY` (e.g. 4-8px) over full-height moves.
 - Faster than the enter — use ~75% of the enter duration. Exits shouldn't linger.
+- **Close on a subtler scale than the open started from** (e.g. opens from `scale(0.97)`, closes toward `scale(0.99)`). Exits shouldn't "pop" as much as the entrance did.
 
 ## Page Load
 
@@ -77,6 +79,7 @@ Every animation must answer "why does this animate?"
 
 - **Never** `transition: all`. Specify exact properties: `transition-property: scale, opacity`.
 - Tailwind: `transition-transform` covers `transform, translate, scale, rotate`.
+- **Animate the inner piece, not the container.** Badge dot, not the trigger button. Page sections, not the wrapper. Animating the container makes the surrounding context move; the changing thing should be the thing that moves.
 
 ## Performance
 
@@ -226,4 +229,4 @@ Respecting `prefers-reduced-motion` is an accessibility requirement, not optiona
 
 ## Attribution
 
-Synthesized from: emilkowalski/skill, jakubkrehel/make-interfaces-feel-better `animations.md`, pbakaus/impeccable `motion-design.md`, MDN web docs (`interpolate-size`, `calc-size()`), vercel-labs/web-interface-guidelines (SVG Safari fix), fixing-motion-performance skill (FLIP, scroll timelines, blur ordering).
+Synthesized from: emilkowalski/skill, jakubkrehel/make-interfaces-feel-better `animations.md`, pbakaus/impeccable `motion-design.md`, MDN web docs (`interpolate-size`, `calc-size()`), vercel-labs/web-interface-guidelines (SVG Safari fix), fixing-motion-performance skill (FLIP, scroll timelines, blur ordering), Jakubantalik/transitions-dev (close-scale subtlety, animate-inner-piece, blur+motion pairing).
