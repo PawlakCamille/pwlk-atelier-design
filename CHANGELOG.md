@@ -6,6 +6,18 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.22 — 2026-05-09 — Frontmatter cleanup: move `version` into `metadata`
+
+Audit pass via Anthropic's `skill-creator` flagged custom top-level keys in the YAML frontmatter. The `version` key is a personal convention (used to track our changelog) and not part of any standard skill spec, so it moves into `metadata:` where extension keys belong.
+
+### Changed
+- All five SKILL.md files (`cami-design`, `cami-design-layout`, `cami-design-interaction`, `cami-design-copy`, `cami-design-engineer`) — `version: X.Y.Z` removed from top-level frontmatter, replaced by `metadata: { version: X.Y.Z }`.
+
+### Deliberately kept at top level
+- `argument-hint` and `user-invocable` — both are documented Claude Code skill features. Moving them into `metadata` would silently break slash-command behavior in Claude Code to satisfy a stricter validator. Trade-off accepted.
+
+---
+
 ## 0.1.21 — 2026-05-08 — cami-design-engineer + severity column + Verify pass
 
 Adds a fourth sub-skill for the code-side handoff moment, propagates a severity column across all sub-skills, and introduces a Verify pass to walkthrough mode.

@@ -1,9 +1,10 @@
 ---
 name: cami-design-engineer
 description: Composition, design system fidelity, state, a11y, performance, types. Use at the end of a project to polish the code before tech-team handoff.
-version: 0.1.0
 user-invocable: true
 argument-hint: "[target]"
+metadata:
+  version: 0.1.0
 ---
 
 ## MANDATORY PREPARATION
