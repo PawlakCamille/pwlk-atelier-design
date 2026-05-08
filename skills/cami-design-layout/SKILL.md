@@ -72,7 +72,7 @@ Work through these systematically. For each, use the `Before | After | Why` tabl
 
 ## Output
 
-Present findings grouped by dimension, each as a `Before | After | Why` table. Omit dimensions that had no issues.
+Present findings grouped by dimension, each as a table with columns `# | Severity | Before | After | Why`. Severity is 🔴 (Important) or 🟡 (Nit) — see the parent skill's `Review Output Format → Severity scale` for calibration. Omit dimensions that had no issues.
 
 ## References
 

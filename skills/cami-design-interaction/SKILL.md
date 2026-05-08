@@ -109,7 +109,7 @@ Always provide a reduced-motion fallback — ignoring this is an accessibility v
 
 ## Output
 
-Findings as `Before | After | Why` tables, grouped by dimension. Skip dimensions with no issues.
+Findings as tables with columns `# | Severity | Before | After | Why`, grouped by dimension. Severity is 🔴 (Important) or 🟡 (Nit) — see the parent skill's `Review Output Format → Severity scale` for calibration. Skip dimensions with no issues.
 
 ## References
 

@@ -170,19 +170,31 @@ These apply across every mode. Keep them in mind whether you are composing a lay
 
 Present findings grouped into lettered sections. Each section clusters related issues under a descriptive title. One row per change, numbered within its section.
 
+### Severity scale
+
+Every finding carries a severity emoji so the user can scan the list at a glance.
+
+| Symbol | Label | Meaning |
+| --- | --- | --- |
+| 🔴 | **Important** | Broken behavior, clear DS violation, accessibility blocker, or a craft miss the user *will* notice. Block-equivalent. |
+| 🟡 | **Nit** | Worth fixing for craft and consistency, not blocking. Cap at ~5 per section; mention `+N similar` if more. |
+| 🟣 | **Pre-existing** | Issue exists in the codebase but wasn't introduced by the current changes. Surface, don't block. *(Engineer mode only — visual-design audits don't have a diff scope, so they use 🔴 / 🟡 only.)* |
+
+How to calibrate: weigh **Frequency** (how often is this surface or path hit?), **Impact** (how hard to recover when it bites?), and **Persistence** (one-off vs. recurring). High on all three → 🔴. Low on all three → 🟡. Mixed → judgement, lean 🟡 unless it blocks intent.
+
 ### Structure
 
 ```
 ## A — [title describing what was found]
-| # | Before | After | Why |
-|---|--------|-------|-----|
-| A1 | ... | ... | ... |
-| A2 | ... | ... | ... |
+| #  | Severity | Before | After | Why |
+|----|----------|--------|-------|-----|
+| A1 | 🔴 | ... | ... | ... |
+| A2 | 🟡 | ... | ... | ... |
 
 ## B — [title describing what was found]
-| # | Before | After | Why |
-|---|--------|-------|-----|
-| B1 | ... | ... | ... |
+| #  | Severity | Before | After | Why |
+|----|----------|--------|-------|-----|
+| B1 | 🔴 | ... | ... | ... |
 ```
 
 ### Section titles

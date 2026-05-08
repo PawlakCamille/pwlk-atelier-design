@@ -132,7 +132,7 @@ Every piece of copy should pass this checklist:
 
 ## Output
 
-Findings as `Before | After | Why` tables, grouped by dimension. Cite the specific file and component when possible.
+Findings as tables with columns `# | Severity | Before | After | Why`, grouped by dimension. Severity is 🔴 (Important) or 🟡 (Nit) — see the parent skill's `Review Output Format → Severity scale` for calibration. Cite the specific file and component when possible.
 
 ## References
 
