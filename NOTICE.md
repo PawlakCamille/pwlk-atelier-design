@@ -72,6 +72,74 @@ Modern CSS primitives added via progressive-enhancement guidance drawn from MDN 
 
 Sources: developer.mozilla.org, developer.chrome.com, webkit.org.
 
+### Anthropic — Claude Code Review docs
+Source: https://code.claude.com/docs/en/code-review
+
+Contributions absorbed (May 2026, into `cami-design-engineer`):
+- 3-tier severity model: 🔴 Important / 🟡 Nit / 🟣 Pre-existing
+- Verification bar — every finding cites `file:line` from real code, no inference from naming
+- Re-review convergence — second pass over the same code suppresses new nits, posts Important findings only
+- Skip rules: anything CI already enforces, generated files, lockfiles, vendored deps, intentional test-only violations
+- Summary shape — open with a one-line tally (`X 🔴 · Y 🟡 · Z 🟣`); lead with `No blocking issues for handoff` when nothing is Important
+
+License: documentation reference, applied as concept absorption.
+
+### vercel-labs/agent-skills — composition-patterns
+Source: https://github.com/vercel-labs/agent-skills/tree/main/skills/composition-patterns
+
+Contributions absorbed (May 2026, into `cami-design-engineer` → Component Composition):
+- `architecture-avoid-boolean-props` — boolean prop sprawl refactor to `variant` prop or compound parts
+- `architecture-compound-components` — slot-shaped UI uses the compound pattern
+- `patterns-explicit-variants` — explicit variants over boolean modes
+- `patterns-children-over-render-props` — children over `renderX` callbacks
+- `react19-no-forwardref` — drop `forwardRef` in React 19+
+- `state-decouple-implementation`, `state-context-interface`, `state-lift-state` — provider exposes a stable `{ state, actions }` interface; lift state to share across siblings; children never reach into the storage
+
+License: MIT.
+
+### vercel-labs/agent-skills — react-best-practices
+Source: https://github.com/vercel-labs/agent-skills/tree/main/skills/react-best-practices
+
+Contributions absorbed (May 2026, into `cami-design-engineer` → State & Data Flow + Performance & Rendering):
+- Re-render: `rerender-defer-reads`, `rerender-memo`, `rerender-dependencies`, `rerender-derived-state`, `rerender-functional-setstate`, `rerender-lazy-state-init`, `rerender-transitions`
+- Rendering: `rendering-animate-svg-wrapper`, `rendering-hoist-jsx`, `rendering-conditional-render`
+- Bundle: `bundle-barrel-imports`, `bundle-dynamic-imports`
+- Async / data: `async-parallel`, `client-swr-dedup`, `client-event-listeners`
+- JS perf: `js-tosorted-immutable`, `js-set-map-lookups`
+
+Deliberately **not** absorbed: all `server-*` and Next-specific async rules (we target Vite SPAs, not Next), micro-opts (`js-cache-*`, `js-combine-iterations`, `js-length-check-first`, `js-early-exit`, `js-hoist-regexp`, `js-min-max-loop`, `js-batch-dom-css`), niche rendering (`rendering-content-visibility`, `rendering-svg-precision`, `rendering-hydration-no-flicker`, `rendering-activity`), advanced ref tricks (`advanced-event-handler-refs`, `advanced-use-latest`), `bundle-conditional`, `bundle-preload`, `bundle-defer-third-party`. 17 of 45 rules absorbed; the rest don't apply to the target stack.
+
+License: MIT.
+
+### wshobson/agents — code-review-excellence
+Source: https://github.com/wshobson/agents
+
+Contributions absorbed (May 2026, into `cami-design-engineer`):
+- PR size guard — ask the user to scope by feature or file when the diff exceeds ~400 changed lines
+- Mutating props anti-pattern — treat props as read-only; notify the parent via callback rather than mutating
+
+License: see upstream.
+
+### mistyhx/frontend-design-audit
+Source: https://github.com/mistyhx/frontend-design-audit
+
+Contributions absorbed (May 2026):
+- Severity calibration framework — Frequency × Impact × Persistence (now in parent `Review Output Format → Severity scale`)
+- Verify pass — focused second look at modified code/UI after fixes are applied (now in parent `Review Output Format → Walkthrough mode`)
+
+License: see upstream.
+
+### themobilefirstco/desktop-allo — CI claude-code-review.yml
+Source: https://github.com/themobilefirstco/desktop-allo/blob/main/.github/workflows/claude-code-review.yml
+
+Contributions absorbed (May 2026, into `cami-design-engineer`):
+- Untested business logic flagging — flag hooks/utilities/services with branching logic that lack tests, naming the function and branches that need coverage (don't write the tests; surface the gap for the tech team)
+- E2E testid awareness — grep `e2e/` for `data-testid` selectors before flagging refactors that remove or rename them; testid changes break E2E silently
+
+The workflow itself is internal; the prompt's review philosophy informed the engineer skill.
+
+License: internal repo, used with author's permission as the maintainer of both repos.
+
 ### vercel-labs/web-interface-guidelines
 Author: Vercel Labs
 

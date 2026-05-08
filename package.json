@@ -1,7 +1,7 @@
 {
   "name": "cami-design",
-  "version": "0.1.20",
-  "description": "Camille Pawlak's Claude Code design skill — layout, interaction, and copy modes for building and reviewing interfaces with intent.",
+  "version": "0.1.21",
+  "description": "Camille Pawlak's Claude Code design skill — layout, interaction, copy, and engineer modes for building, reviewing, and shipping interfaces with intent.",
   "keywords": [
     "claude",
     "claude-code",

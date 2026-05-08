@@ -8,18 +8,21 @@ Camille Pawlak's personal Claude Code design skill. A curated collection of prin
 npm install -g cami-design
 ```
 
-That's it. Four slash commands are linked into Claude Code automatically.
+That's it. Five slash commands are linked into Claude Code automatically.
 
 ## Usage
 
 ```
-/cami-design        — load shared principles, route to a mode
+/cami-design               — load shared principles, route to a mode
 /cami-design-layout        — alignment, sizing, spacing, visual hierarchy
 /cami-design-interaction   — animation, hover/press states, micro-interactions
 /cami-design-copy          — microcopy, labels, errors, tone
+/cami-design-engineer      — code review for tech-team handoff (composition, DS fidelity, state, a11y, perf, types)
 ```
 
 Or let the skills auto-trigger — the frontmatter descriptions are tuned to activate on related work.
+
+The first three modes audit visual design. `cami-design-engineer` is the code-side handoff pass — run it at the end of a project before passing the codebase to a tech team. A full `/cami-design` audit will offer it at the end.
 
 ## Design Context
 
@@ -39,16 +42,17 @@ The skill reads it automatically on each invocation.
 
 ```
 skills/
-├── cami-design/        # parent: principles, references, context protocol
+├── cami-design/              # parent: principles, references, context protocol
 │   ├── SKILL.md
-│   ├── references/        # deep material loaded on demand
-│   └── libraries/         # easing curves, palettes, font pairings
+│   ├── references/           # deep material loaded on demand
+│   └── libraries/            # easing curves, palettes, font pairings
 ├── cami-design-layout/
 ├── cami-design-interaction/
-└── cami-design-copy/
-evals/                     # test corpus for iterative improvement
-CHANGELOG.md               # what was absorbed, from where, when
-NOTICE.md                  # attribution to upstream skills
+├── cami-design-copy/
+└── cami-design-engineer/     # code-side handoff pass
+evals/                        # test corpus for iterative improvement
+CHANGELOG.md                  # what was absorbed, from where, when
+NOTICE.md                     # attribution to upstream skills
 ```
 
 ## Evolution
