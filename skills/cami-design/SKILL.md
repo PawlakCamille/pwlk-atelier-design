@@ -1,7 +1,7 @@
 ---
 name: cami-design
 description: Looks at your UI and figures out what's wrong, then brings in layout, interaction, copy, or engineer as needed.
-version: 0.1.20
+version: 0.1.21
 user-invocable: true
 argument-hint: "[cami-design-layout|cami-design-interaction|cami-design-copy|cami-design-engineer]"
 license: Apache 2.0. Inspired by anthropics/frontend-design, pbakaus/impeccable, emilkowalski/skill, and jakubkrehel/make-interfaces-feel-better. See NOTICE.md for attribution.

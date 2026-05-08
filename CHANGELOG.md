@@ -6,6 +6,59 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.21 — 2026-05-08 — cami-design-engineer + severity column + Verify pass
+
+Adds a fourth sub-skill for the code-side handoff moment, propagates a severity column across all sub-skills, and introduces a Verify pass to walkthrough mode.
+
+### Added — `cami-design-engineer`
+
+New sub-skill for end-of-project code review before tech-team handoff. Replaces the manual stack of `/review` + composition-patterns + "review like a senior FE" prompts.
+
+Six dimensions:
+- **Component Composition** — boolean prop sprawl, render props vs children, `forwardRef` in React 19+, fetch+render coupling, premature abstraction, provider/context patterns (lift state, decouple implementation, context interface)
+- **Design System Fidelity** — hardcoded values vs tokens, DS components mixed with hand-rolled, canonical import paths, generic Tailwind utilities where typed scales exist
+- **State & Data Flow** — `useEffect` cleanup, debounce, defer reads, primitive deps, derived state, race conditions, functional `setState`, immutable sort, parallel requests, request dedup, props mutation
+- **A11y Implementation** — `<div onClick>`, icon-only buttons, label/input wiring, alt/aria-hidden, modal focus trap, color-only signals, keyboard handlers
+- **Performance & Rendering** — array-index keys, hoist JSX, lazy load, barrel imports, memoization, falsy-AND, SVG animation, lazy state init, transitions, global listener dedup, Set/Map lookups
+- **Type Safety & Code Clarity** — `as any`, props convention, inference, barrels, comment hygiene, magic numbers, file casing, function declaration style, untested business logic flagging
+
+### Added — Severity column across all sub-skills
+
+Every finding now carries a severity emoji:
+- 🔴 **Important** — broken behavior, DS violation, a11y blocker, craft miss the user will notice
+- 🟡 **Nit** — worth fixing for craft, not blocking; cap ~5 per section
+- 🟣 **Pre-existing** — issue exists but wasn't introduced by current changes (engineer mode only — visual-design audits don't have a diff scope)
+
+Calibration documented as **Frequency × Impact × Persistence** in `cami-design/SKILL.md → Review Output Format → Severity scale`. The three visual-design sub-skills reference the parent's scale instead of duplicating the definition.
+
+### Added — Verify pass in walkthrough mode
+
+After fixes are applied, walkthrough now offers a Verify pass: a focused second look at the modified code/UI to catch issues introduced by the fixes themselves or missed adjacent instances. `Verify: clean.` is a valid output.
+
+### Added — Engineer offer at the end of full audit
+
+When `cami-design` runs as a full audit (3 visual-design sub-skills), it now offers `cami-design-engineer` via `AskUserQuestion` at the end. Keeps design and engineer as two distinct moments of the same audit. Skipped when the target is a static design or the engineer skill already ran in the session.
+
+### Sources
+
+- **Anthropic Code Review docs** — severity model, verification bar, re-review convergence, skip rules, summary shape
+- **vercel-labs/agent-skills/composition-patterns** (MIT) — 8 of 8 applicable rules
+- **vercel-labs/agent-skills/react-best-practices** (MIT) — 17 of 45 rules; Next/SSR-only and micro-opts deliberately skipped
+- **wshobson/agents/code-review-excellence** — PR size guard, props mutation
+- **mistyhx/frontend-design-audit** — severity calibration framework, Verify step
+- **themobilefirstco/desktop-allo CI claude-code-review.yml** — untested business logic flagging, E2E testid awareness
+
+### Reviewed and not absorbed
+
+- `obra/superpowers/requesting-code-review` and `receiving-code-review` (74K + 59K installs) — wrong audience (requester / receiver, not reviewer)
+- `wshobson/agents/code-review-excellence` soft-skill content — feedback tone catchphrases skipped per editorial direction
+- `onewave-ai/claude-skills/code-review-pro` — backend-flavored security checklist (SQL injection, CSRF) doesn't fit a frontend SPA scope
+- `anthropics/knowledge-work-plugins/design-handoff` — different deliverable type (specs generation); flagged as a future 5th sub-skill `cami-design-handoff`
+- `vercel-labs/agent-skills/web-design-guidelines` — out of scope
+- 28 of 45 vercel-react-best-practices rules — Next-specific (`server-*`, `async-suspense`), SSR (`hydration-no-flicker`), or micro-opt (`js-cache-*`, `js-combine-iterations`, etc.)
+
+---
+
 ## 0.1.20 — 2026-05-03 — Motion craft: blur+motion, close-subtlety, animate-inner
 
 Three small craft principles absorbed from `Jakubantalik/transitions-dev` (the agent-skill packaging of the transitions.dev snippet collection).
