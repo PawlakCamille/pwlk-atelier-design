@@ -2,6 +2,24 @@
 
 Deep reference for composition. Loaded on demand.
 
+## Contents
+
+- [The Spacing Scale](#the-spacing-scale)
+- [Concentric Border Radius](#concentric-border-radius)
+- [Optical vs Geometric Alignment](#optical-vs-geometric-alignment)
+- [Hit Areas](#hit-areas)
+- [Shadows Over Borders](#shadows-over-borders)
+- [Image Outlines](#image-outlines)
+- [Scrollbar Gutter](#scrollbar-gutter)
+- [Tame Native Scrollbars](#tame-native-scrollbars)
+- [Long-form Layouts](#long-form-layouts)
+- [Safe Areas (Mobile Notch)](#safe-areas-mobile-notch)
+- [Content Resilience](#content-resilience)
+- [Card Layout](#card-layout)
+- [Anchored Headings](#anchored-headings)
+- [Vertical Rhythm](#vertical-rhythm)
+- [Responsive](#responsive)
+
 ## The Spacing Scale
 
 - Use a scale (Tailwind default, 4px-based, 8px-based — pick one and stick to it).

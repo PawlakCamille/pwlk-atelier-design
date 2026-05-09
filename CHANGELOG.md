@@ -32,6 +32,10 @@ After the loop finished, applied three aesthetic improvements to the description
 
 `cami-design-layout` and `cami-design-copy` left unchanged — both were already balanced.
 
+### Added — Table of contents on `spacing-layout.md`
+
+The file passed the 300-line threshold (`skill-creator` recommends a TOC for references >300 lines) after the recent absorptions. Flat list of all 15 sections with anchor links at the top so an LLM consulting the reference can scan-and-jump rather than read top-to-bottom.
+
 ### Description loop findings (no code change)
 
 Ran `skill-creator`'s description optimization loop on the parent `cami-design` skill (5 iterations, 12-train / 8-test split, 3 runs per query). Result: **no proposed description beat the original**. Recall stayed at 0% across all 5 iterations regardless of phrasing.
