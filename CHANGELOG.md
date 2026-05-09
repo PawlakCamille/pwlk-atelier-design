@@ -6,6 +6,23 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.23 — 2026-05-09 — Absorb react-doctor into engineer skill
+
+### Added — 6 patterns absorbed from millionco/react-doctor
+
+Audited the full react-doctor rule set (~30 rules) against the existing skill. The majority were already covered or belonged to the visual design sub-skills. Six patterns were genuinely new to `cami-design-engineer`:
+
+- **Inline props defeating memoization** — inline functions, objects, or arrays passed to `memo`'d components silently break the cache on every render.
+- **Default `{}`/`[]` prop values on memoized components** — `function Card({ items = [] })` creates a new reference each render; the fix is a module-level constant.
+- **`useMemo` on trivial expressions** — wrapping `items.length` in `useMemo` costs more than it saves; clarified when memoization is actually warranted.
+- **Nondeterministic values in render body** — `new Date()`, `Math.random()`, `crypto.randomUUID()` cause server/client hydration mismatches in Next.js. Move into `useEffect` or a server context.
+- **`setState` in high-frequency handlers** — `scroll`/`mousemove`/`wheel` fire at 60–120Hz; direct `setState` queues a synchronous re-render on every tick. Use `startTransition` or `useDeferredValue`.
+- **Framer Motion layout property animation** — `animate={{ width, height, padding }}` forces layout recalculation every frame; use `scaleX`/`scaleY` with `transformOrigin` instead.
+
+Source: [millionco/react-doctor](https://github.com/millionco/react-doctor)
+
+---
+
 ## 0.1.22 — 2026-05-09 — Audit pass via skill-creator
 
 Pass through the skill via Anthropic's `skill-creator` surfaced two structural improvements (frontmatter standardization, codebase-precedent rule for the engineer pass) and one structural finding that the description loop validated empirically (the parent `cami-design` description should not be optimized further — see "Description loop findings" below).
