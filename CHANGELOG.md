@@ -6,15 +6,29 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
-## 0.1.22 — 2026-05-09 — Frontmatter cleanup: move `version` into `metadata`
+## 0.1.22 — 2026-05-09 — Audit pass via skill-creator
 
-Audit pass via Anthropic's `skill-creator` flagged custom top-level keys in the YAML frontmatter. The `version` key is a personal convention (used to track our changelog) and not part of any standard skill spec, so it moves into `metadata:` where extension keys belong.
+Pass through the skill via Anthropic's `skill-creator` surfaced two structural improvements (frontmatter standardization, codebase-precedent rule for the engineer pass) and one structural finding that the description loop validated empirically (the parent `cami-design` description should not be optimized further — see "Description loop findings" below).
 
-### Changed
-- All five SKILL.md files (`cami-design`, `cami-design-layout`, `cami-design-interaction`, `cami-design-copy`, `cami-design-engineer`) — `version: X.Y.Z` removed from top-level frontmatter, replaced by `metadata: { version: X.Y.Z }`.
+### Changed — frontmatter cleanup
 
-### Deliberately kept at top level
-- `argument-hint` and `user-invocable` — both are documented Claude Code skill features. Moving them into `metadata` would silently break slash-command behavior in Claude Code to satisfy a stricter validator. Trade-off accepted.
+`skill-creator`'s validator flagged the custom `version` key as non-standard. Moved into `metadata:` across all five SKILL.md files (`cami-design`, `cami-design-layout`, `cami-design-interaction`, `cami-design-copy`, `cami-design-engineer`).
+
+`argument-hint` and `user-invocable` deliberately kept at top level — both are documented Claude Code skill features. Moving them into `metadata` would silently break slash-command behavior to satisfy a stricter validator. Trade-off accepted.
+
+### Added — Engineer skill: "Check Codebase Precedent First"
+
+New section in `cami-design-engineer/SKILL.md`, between Preparation and Review Dimensions. Before flagging any "should be X", the engineer pass must first search the repo for existing implementations of the same need.
+
+The most common review failure is proposing a "better" version of something the project already has in a different style — introducing parallel approaches and breaking consistency. The new section formalizes the three-step check (does it exist? align with it. flag divergences as intentional choices). Especially relevant for utilities, component patterns, state management style, and naming conventions.
+
+### Description loop findings (no code change)
+
+Ran `skill-creator`'s description optimization loop on the parent `cami-design` skill (5 iterations, 12-train / 8-test split, 3 runs per query). Result: **no proposed description beat the original**. Recall stayed at 0% across all 5 iterations regardless of phrasing.
+
+The loop confirmed that the parent's triggering issue is structural, not a wording problem: when sub-skills are also installed, queries like "audit my settings panel" route to the most specific sibling (`cami-design-layout` etc.) before reaching the parent. The parent is best invoked explicitly via `/cami-design`, which is already the supported entry path.
+
+Run artifacts in `cami-design-workspace/description-loop/2026-05-09_003308/` (gitignored) for future reference.
 
 ---
 

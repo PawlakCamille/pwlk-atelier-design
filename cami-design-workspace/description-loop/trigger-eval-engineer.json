@@ -1,0 +1,22 @@
+[
+  {"query": "code review on my new <Card> component before merge — want a senior FE eye on it", "should_trigger": true},
+  {"query": "my component has too many boolean props, refactor for cleaner composition", "should_trigger": true},
+  {"query": "audit my React component before tech handoff — best practices, naming, structure", "should_trigger": true},
+  {"query": "this useEffect is causing re-renders, review the data flow and state management", "should_trigger": true},
+  {"query": "review my modal component for a11y at the code level — focus trap, aria, keyboard nav", "should_trigger": true},
+  {"query": "audit the perf of my homepage React components before launch", "should_trigger": true},
+  {"query": "I'm about to ship — can you do a code-side polish pass on these 3 files", "should_trigger": true},
+  {"query": "check this PR for type safety issues and component composition before I merge", "should_trigger": true},
+  {"query": "before tech handoff, audit the code in /components/dashboard/ for cleanup", "should_trigger": true},
+  {"query": "tu peux vérifier si mon nouveau composant est aligné avec les conventions qu'on a déjà dans le repo?", "should_trigger": true},
+  {"query": "the cards on my homepage feel uneven", "should_trigger": false},
+  {"query": "my hover state needs to be snappier", "should_trigger": false},
+  {"query": "rewrite my error messages to be more direct", "should_trigger": false},
+  {"query": "build me a new auth flow", "should_trigger": false},
+  {"query": "how do I install TypeScript with strict mode", "should_trigger": false},
+  {"query": "what's the best React state library?", "should_trigger": false},
+  {"query": "translate my product copy to English", "should_trigger": false},
+  {"query": "audit the visual rhythm of my UI", "should_trigger": false},
+  {"query": "my modal animation feels off", "should_trigger": false},
+  {"query": "fix my Next.js routing 404", "should_trigger": false}
+]

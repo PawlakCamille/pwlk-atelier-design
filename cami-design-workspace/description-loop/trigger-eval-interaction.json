@@ -1,0 +1,22 @@
+[
+  {"query": "the dropdown open animation feels janky, can you review it", "should_trigger": true},
+  {"query": "hover states on my buttons look too aggressive, soften them", "should_trigger": true},
+  {"query": "the modal close transition feels abrupt, make it polished", "should_trigger": true},
+  {"query": "review the press feedback on my interactive elements — they feel dead", "should_trigger": true},
+  {"query": "scroll-triggered animations on the landing page feel off-tempo", "should_trigger": true},
+  {"query": "the input focus state is too loud, audit the interaction polish", "should_trigger": true},
+  {"query": "my page transitions feel sluggish, what should I tighten", "should_trigger": true},
+  {"query": "icons don't react when you interact with them, the experience feels static", "should_trigger": true},
+  {"query": "the toggle switch animation looks robotic, review the motion craft", "should_trigger": true},
+  {"query": "tu peux check le hover state du composant Card.tsx, ça me semble flat", "should_trigger": true},
+  {"query": "audit the spacing between cards on the dashboard", "should_trigger": false},
+  {"query": "the success message is too cheerful, make it more measured", "should_trigger": false},
+  {"query": "this component has a memory leak with addEventListener", "should_trigger": false},
+  {"query": "build me a new modal component", "should_trigger": false},
+  {"query": "how do I install Framer Motion", "should_trigger": false},
+  {"query": "the column widths in my table look uneven", "should_trigger": false},
+  {"query": "rewrite the labels for my form fields", "should_trigger": false},
+  {"query": "review my React component for prop drilling", "should_trigger": false},
+  {"query": "translate my UI text", "should_trigger": false},
+  {"query": "what easing curve should I use for ease-out?", "should_trigger": false}
+]

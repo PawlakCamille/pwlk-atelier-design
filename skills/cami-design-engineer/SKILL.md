@@ -34,6 +34,18 @@ This skill reviews **code**. For visual judgement (spacing, motion, copy), use `
 6. If the diff exceeds ~400 changed lines (excluding generated and lockfiles), ask the user to scope the review by feature or file before continuing. Wide reviews lose signal.
 7. If the project has an E2E test suite (`e2e/`, `playwright/`, `cypress/`…), grep it for `data-testid` selectors before flagging refactors. Removing or renaming a referenced testid breaks the test silently. Note any testid changes in the review.
 
+## Check Codebase Precedent First
+
+Before flagging anything as "should be X", search the repo for existing implementations of the same need. The most common review failure is proposing a "better" version of something the project already has in a different style — that introduces parallel approaches and breaks consistency.
+
+The check, on every finding:
+
+1. **Does the codebase already solve this?** Utilities, hooks, components, state libraries, naming conventions — search before recommending.
+2. **If yes, align with what exists.** The finding becomes "reuse X" not "introduce Y."
+3. **If the new code diverges from established conventions without an explicit reason, flag the divergence** so the author can decide intentionally rather than by accident.
+
+Especially relevant for: utilities and hooks (`useDebounce`, `cn`, formatters), component patterns (modals, forms, tables), state management style, and file naming conventions.
+
 ## Review Dimensions
 
 Work through these systematically. Each finding goes into the `Before | After | Why` table format defined in **Output**. Skip dimensions with no findings.
