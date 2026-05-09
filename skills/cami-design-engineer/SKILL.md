@@ -1,6 +1,6 @@
 ---
 name: cami-design-engineer
-description: Composition, design system fidelity, state, a11y, performance, types. Use at the end of a project to polish the code before tech-team handoff.
+description: Composition, state, a11y, perf, types, codebase fit. Use before handoff or for a senior FE code review.
 user-invocable: true
 argument-hint: "[target]"
 metadata:

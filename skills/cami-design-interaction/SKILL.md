@@ -1,6 +1,6 @@
 ---
 name: cami-design-interaction
-description: Hover states, animations, button feedback, motion. Use when interactions feel sluggish, flat, or lifeless.
+description: Hover, press, animations, motion. Use when interactions feel sluggish, flat, robotic, or lifeless.
 user-invocable: true
 argument-hint: "[target]"
 metadata:

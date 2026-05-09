@@ -22,6 +22,16 @@ New section in `cami-design-engineer/SKILL.md`, between Preparation and Review D
 
 The most common review failure is proposing a "better" version of something the project already has in a different style — introducing parallel approaches and breaking consistency. The new section formalizes the three-step check (does it exist? align with it. flag divergences as intentional choices). Especially relevant for utilities, component patterns, state management style, and naming conventions.
 
+### Changed — three description polishes
+
+After the loop finished, applied three aesthetic improvements to the descriptions even though the loop didn't validate them empirically (the test mechanism turned out to measure slash-command auto-invocation rather than skill registry triggering, so its null result wasn't conclusive).
+
+- **`cami-design`** — adds "before shipping" to anchor the moment of use, swaps "figures out what's wrong" for the more measured "spots what's off". 111 → 101 chars.
+- **`cami-design-interaction`** — replaces "button feedback" (slightly engineer-coded) with "press" (more natural designer vocabulary), adds "robotic" as a recognized symptom. 106 → 98 chars.
+- **`cami-design-engineer`** — drops "design system fidelity" (was overlapping with the visual sub-skills), replaces with "codebase fit" (ties to the new Codebase Precedent rule), broadens trigger context beyond "end of project". 142 → 103 chars.
+
+`cami-design-layout` and `cami-design-copy` left unchanged — both were already balanced.
+
 ### Description loop findings (no code change)
 
 Ran `skill-creator`'s description optimization loop on the parent `cami-design` skill (5 iterations, 12-train / 8-test split, 3 runs per query). Result: **no proposed description beat the original**. Recall stayed at 0% across all 5 iterations regardless of phrasing.
