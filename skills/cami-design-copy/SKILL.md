@@ -1,9 +1,10 @@
 ---
 name: cami-design-copy
 description: Labels, errors, empty states, tone. Use when text reads awkwardly or leaves users guessing what to do.
-version: 0.1.0
 user-invocable: true
 argument-hint: "[target]"
+metadata:
+  version: 0.1.0
 ---
 
 ## MANDATORY PREPARATION

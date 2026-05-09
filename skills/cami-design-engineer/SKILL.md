@@ -1,9 +1,10 @@
 ---
 name: cami-design-engineer
-description: Composition, design system fidelity, state, a11y, performance, types. Use at the end of a project to polish the code before tech-team handoff.
-version: 0.1.0
+description: Composition, state, a11y, perf, types, codebase fit. Use before handoff or for a senior FE code review.
 user-invocable: true
 argument-hint: "[target]"
+metadata:
+  version: 0.1.0
 ---
 
 ## MANDATORY PREPARATION
@@ -32,6 +33,18 @@ This skill reviews **code**. For visual judgement (spacing, motion, copy), use `
 5. Scope to changed code by default (`git diff <base>...HEAD`). Exclude generated files, lockfiles, vendored dependencies, and test fixtures. Full-file review only if the user asks.
 6. If the diff exceeds ~400 changed lines (excluding generated and lockfiles), ask the user to scope the review by feature or file before continuing. Wide reviews lose signal.
 7. If the project has an E2E test suite (`e2e/`, `playwright/`, `cypress/`…), grep it for `data-testid` selectors before flagging refactors. Removing or renaming a referenced testid breaks the test silently. Note any testid changes in the review.
+
+## Check Codebase Precedent First
+
+Before flagging anything as "should be X", search the repo for existing implementations of the same need. The most common review failure is proposing a "better" version of something the project already has in a different style — that introduces parallel approaches and breaks consistency.
+
+The check, on every finding:
+
+1. **Does the codebase already solve this?** Utilities, hooks, components, state libraries, naming conventions — search before recommending.
+2. **If yes, align with what exists.** The finding becomes "reuse X" not "introduce Y."
+3. **If the new code diverges from established conventions without an explicit reason, flag the divergence** so the author can decide intentionally rather than by accident.
+
+Especially relevant for: utilities and hooks (`useDebounce`, `cn`, formatters), component patterns (modals, forms, tables), state management style, and file naming conventions.
 
 ## Review Dimensions
 
@@ -88,10 +101,16 @@ Work through these systematically. Each finding goes into the `Before | After | 
 - **Heavy component loaded eagerly.** A chart library, a rich-text editor, a markdown renderer always in the bundle even when the feature isn't used. Lazy-load with `lazy()` / `dynamic()`.
 - **Barrel imports pulling in more than needed.** `import { Button } from '@/components/ui'` where the barrel re-exports 30 components. Import directly when bundle size matters.
 - **Missing `memo` on a component inside a hot list.** Only flag if the list is large and the component receives stable props. Don't memoize speculatively — premature `memo` adds noise.
+- **Inline function or object passed to a memoized component.** `<MemoCard onClick={() => handle(id)} style={{ padding: 16 }} />` — the inline value is a new reference on every render, silently defeating `memo`. Extract stable callbacks with `useCallback` and objects with `useMemo` at the call site.
+- **Default prop value `{}` or `[]` on a memoized component.** `function Card({ items = [] })` creates a new array reference on every render. Pull the default outside the component: `const EMPTY: Item[] = []` and use that.
+- **`useMemo` wrapping a trivially cheap expression.** `useMemo(() => items.length, [items])` — the overhead of `useMemo` itself is higher than the computation. Only memoize when the expression is measurably expensive or produces a referentially stable object that feeds another hook.
 - **`{value && <Component />}` where `value` can be `0` or `''`.** React renders the falsy value instead of skipping. Use a ternary: `{value ? <Component /> : null}`.
 - **Animation applied to the `<svg>` element.** Animating the SVG itself is expensive; animate a wrapper `<div>` or use CSS `transform` on the wrapper.
+- **Animation on layout properties in Framer Motion.** `animate={{ width, height, padding, margin }}` forces layout recalculation every frame. Use `animate={{ scaleX, scaleY }}` with `transformOrigin` instead, or restructure so only `transform` and `opacity` animate.
+- **Nondeterministic value in render body causing hydration mismatch.** `new Date()`, `Math.random()`, `crypto.randomUUID()`, `performance.now()` in the component body produce different values on server and client. Move them into `useEffect`, `useState` initializer, or a server-only context.
 - **Expensive computation in `useState` initial value.** `useState(buildBigList())` runs `buildBigList()` on every render even though only the first call matters. Pass a function: `useState(() => buildBigList())`.
 - **Heavy state update blocking the input.** Filtering a 10k-row list on every keystroke freezes the field. Wrap the heavy update in `startTransition(() => setFiltered(...))` so React keeps typing responsive and updates the list when it can.
+- **`setState` inside a high-frequency handler.** `setState` called directly in `scroll`, `mousemove`, or `wheel` handlers queues a synchronous re-render on every event tick — typically 60–120 times per second. Wrap in `startTransition` for non-urgent updates, or use `useDeferredValue` when the derived value drives a heavy subtree.
 - **Same global listener attached in many components.** Multiple components each call `window.addEventListener('scroll' / 'resize' / 'keydown')`. Memory leak risk and duplicated work. Centralize in one custom hook with subscriber callbacks, or attach once at the app root.
 - **`.includes()` or `.find()` on a large array in a hot loop.** O(n) lookup repeated for every item is O(n²). Build a `Set` (membership) or `Map` (key→value) once, then look up in O(1).
 

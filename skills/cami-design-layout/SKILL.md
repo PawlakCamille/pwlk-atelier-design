@@ -1,9 +1,10 @@
 ---
 name: cami-design-layout
 description: Spacing, alignment, hierarchy, rhythm. Use when something looks crowded, unbalanced, or just doesn't sit right.
-version: 0.1.0
 user-invocable: true
 argument-hint: "[target]"
+metadata:
+  version: 0.1.0
 ---
 
 ## MANDATORY PREPARATION

@@ -3,3 +3,13 @@ node_modules/
 evals/runs/
 _candidates/
 .env
+
+# Skills installed via `npx skills add` — see skills-lock.json for sources
+.agents/
+.claude/
+
+# skill-creator workspace outputs (timestamped run artifacts)
+# Eval set JSON files (trigger-eval-*.json) ARE tracked — they document the eval design.
+cami-design-workspace/description-loop/[0-9]*/
+cami-design-workspace/description-loop/*/[0-9]*/
+cami-design-workspace/description-loop/log.txt

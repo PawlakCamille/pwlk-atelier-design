@@ -6,6 +6,63 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.1.23 — 2026-05-09 — Absorb react-doctor into engineer skill
+
+### Added — 6 patterns absorbed from millionco/react-doctor
+
+Audited the full react-doctor rule set (~30 rules) against the existing skill. The majority were already covered or belonged to the visual design sub-skills. Six patterns were genuinely new to `cami-design-engineer`:
+
+- **Inline props defeating memoization** — inline functions, objects, or arrays passed to `memo`'d components silently break the cache on every render.
+- **Default `{}`/`[]` prop values on memoized components** — `function Card({ items = [] })` creates a new reference each render; the fix is a module-level constant.
+- **`useMemo` on trivial expressions** — wrapping `items.length` in `useMemo` costs more than it saves; clarified when memoization is actually warranted.
+- **Nondeterministic values in render body** — `new Date()`, `Math.random()`, `crypto.randomUUID()` cause server/client hydration mismatches in Next.js. Move into `useEffect` or a server context.
+- **`setState` in high-frequency handlers** — `scroll`/`mousemove`/`wheel` fire at 60–120Hz; direct `setState` queues a synchronous re-render on every tick. Use `startTransition` or `useDeferredValue`.
+- **Framer Motion layout property animation** — `animate={{ width, height, padding }}` forces layout recalculation every frame; use `scaleX`/`scaleY` with `transformOrigin` instead.
+
+Source: [millionco/react-doctor](https://github.com/millionco/react-doctor)
+
+---
+
+## 0.1.22 — 2026-05-09 — Audit pass via skill-creator
+
+Pass through the skill via Anthropic's `skill-creator` surfaced two structural improvements (frontmatter standardization, codebase-precedent rule for the engineer pass) and one structural finding that the description loop validated empirically (the parent `cami-design` description should not be optimized further — see "Description loop findings" below).
+
+### Changed — frontmatter cleanup
+
+`skill-creator`'s validator flagged the custom `version` key as non-standard. Moved into `metadata:` across all five SKILL.md files (`cami-design`, `cami-design-layout`, `cami-design-interaction`, `cami-design-copy`, `cami-design-engineer`).
+
+`argument-hint` and `user-invocable` deliberately kept at top level — both are documented Claude Code skill features. Moving them into `metadata` would silently break slash-command behavior to satisfy a stricter validator. Trade-off accepted.
+
+### Added — Engineer skill: "Check Codebase Precedent First"
+
+New section in `cami-design-engineer/SKILL.md`, between Preparation and Review Dimensions. Before flagging any "should be X", the engineer pass must first search the repo for existing implementations of the same need.
+
+The most common review failure is proposing a "better" version of something the project already has in a different style — introducing parallel approaches and breaking consistency. The new section formalizes the three-step check (does it exist? align with it. flag divergences as intentional choices). Especially relevant for utilities, component patterns, state management style, and naming conventions.
+
+### Changed — three description polishes
+
+After the loop finished, applied three aesthetic improvements to the descriptions even though the loop didn't validate them empirically (the test mechanism turned out to measure slash-command auto-invocation rather than skill registry triggering, so its null result wasn't conclusive).
+
+- **`cami-design`** — adds "before shipping" to anchor the moment of use, swaps "figures out what's wrong" for the more measured "spots what's off". 111 → 101 chars.
+- **`cami-design-interaction`** — replaces "button feedback" (slightly engineer-coded) with "press" (more natural designer vocabulary), adds "robotic" as a recognized symptom. 106 → 98 chars.
+- **`cami-design-engineer`** — drops "design system fidelity" (was overlapping with the visual sub-skills), replaces with "codebase fit" (ties to the new Codebase Precedent rule), broadens trigger context beyond "end of project". 142 → 103 chars.
+
+`cami-design-layout` and `cami-design-copy` left unchanged — both were already balanced.
+
+### Added — Table of contents on `spacing-layout.md`
+
+The file passed the 300-line threshold (`skill-creator` recommends a TOC for references >300 lines) after the recent absorptions. Flat list of all 15 sections with anchor links at the top so an LLM consulting the reference can scan-and-jump rather than read top-to-bottom.
+
+### Description loop findings (no code change)
+
+Ran `skill-creator`'s description optimization loop on the parent `cami-design` skill (5 iterations, 12-train / 8-test split, 3 runs per query). Result: **no proposed description beat the original**. Recall stayed at 0% across all 5 iterations regardless of phrasing.
+
+The loop confirmed that the parent's triggering issue is structural, not a wording problem: when sub-skills are also installed, queries like "audit my settings panel" route to the most specific sibling (`cami-design-layout` etc.) before reaching the parent. The parent is best invoked explicitly via `/cami-design`, which is already the supported entry path.
+
+Run artifacts in `cami-design-workspace/description-loop/2026-05-09_003308/` (gitignored) for future reference.
+
+---
+
 ## 0.1.21 — 2026-05-08 — cami-design-engineer + severity column + Verify pass
 
 Adds a fourth sub-skill for the code-side handoff moment, propagates a severity column across all sub-skills, and introduces a Verify pass to walkthrough mode.
