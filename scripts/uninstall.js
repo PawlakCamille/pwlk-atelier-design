@@ -2,9 +2,18 @@
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const autoUpdate = require("./auto-update");
 
-const SKILLS = ["cami-design", "cami-design-layout", "cami-design-interaction", "cami-design-copy"];
+const skillsDir = path.join(__dirname, "..", "skills");
 const targetDir = path.join(os.homedir(), ".claude", "skills");
+
+// Discover skills dynamically — match whatever the bundled package contains
+const SKILLS = fs.existsSync(skillsDir)
+  ? fs
+      .readdirSync(skillsDir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(skillsDir, entry.name, "SKILL.md")))
+      .map((entry) => entry.name)
+  : [];
 
 let removed = [];
 
@@ -24,5 +33,8 @@ for (const skill of SKILLS) {
 
 if (removed.length) {
   console.log(`\n✦ cami-design uninstalled`);
-  console.log(`  Removed: ${removed.join(", ")}\n`);
+  console.log(`  Removed: ${removed.join(", ")}`);
 }
+
+autoUpdate.uninstall();
+console.log("");

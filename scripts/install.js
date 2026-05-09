@@ -2,10 +2,16 @@
 const fs = require("fs");
 const path = require("path");
 const os = require("os");
+const autoUpdate = require("./auto-update");
 
-const SKILLS = ["cami-design", "cami-design-layout", "cami-design-interaction", "cami-design-copy"];
 const skillsDir = path.join(__dirname, "..", "skills");
 const targetDir = path.join(os.homedir(), ".claude", "skills");
+
+// Discover skills dynamically — any directory under skills/ with a SKILL.md
+const SKILLS = fs
+  .readdirSync(skillsDir, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(skillsDir, entry.name, "SKILL.md")))
+  .map((entry) => entry.name);
 
 // Ensure ~/.claude/skills exists
 fs.mkdirSync(targetDir, { recursive: true });
@@ -35,7 +41,10 @@ for (const skill of SKILLS) {
 if (installed.length) {
   console.log(`\n✦ cami-design installed`);
   console.log(`  Skills linked: ${installed.join(", ")}`);
-  console.log(`  Ready to use: /cami-design, /cami-design-layout, /cami-design-interaction, /cami-design-copy\n`);
+  console.log(`  Ready to use: ${SKILLS.map((s) => `/${s}`).join(", ")}`);
 } else {
-  console.log(`\n✦ cami-design already up to date\n`);
+  console.log(`\n✦ cami-design already up to date`);
 }
+
+autoUpdate.install();
+console.log("");
