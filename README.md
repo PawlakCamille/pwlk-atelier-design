@@ -83,7 +83,7 @@ This skill grows by absorbing techniques from upstream sources. The process:
 3. Cherry-pick the specific material into the right reference file.
 4. Run evals again — confirm improvement.
 5. Log in `CHANGELOG.md` with attribution.
-6. `npm version patch && npm publish --access public && git push` — the canonical version lives in `package.json`; sub-skill SKILL.md files no longer carry their own `metadata.version`.
+6. `npm version <patch|minor> && npm publish --access public && git push` — `patch` for absorption-only bumps, `minor` for substantive restructuring (e.g. the v0.2.0 audit cleanup). The canonical version lives in `package.json`; sub-skill SKILL.md files no longer carry their own `metadata.version`.
 
 ## Evals
 

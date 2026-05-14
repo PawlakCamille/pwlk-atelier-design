@@ -60,7 +60,7 @@ The Animation Decision Framework — "should this animate? what's the purpose? w
 
 ## Accessibility
 
-Reduced-motion fallback is mandatory — see `../cami-design/references/accessibility.md` → *Motion* for the canonical snippet and the rationale (vestibular disorders, what to keep vs. remove). Apply at the root, not per-component.
+Reduced-motion fallback is mandatory — see `../cami-design/references/accessibility.md` → *Motion* for the canonical snippet, the rationale (vestibular disorders, what to keep vs. remove), and the application rule.
 
 ## Output
 

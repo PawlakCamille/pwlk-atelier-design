@@ -66,7 +66,7 @@ Form-related copy patterns — instructions before the field, placeholders as ex
 - Never leave "Loading..." for long operations — give context
 - Success messages confirm what happened + what comes next ("Settings saved. Changes take effect immediately.")
 - Match emotional register: celebrate big wins, stay neutral for routine saves
-- **Strip "successfully"** — it adds nothing. "Saved." not "Saved successfully." "Voice updated." not "Voice updated successfully."
+- Trailing "successfully" and routine-status exclamations are anti-patterns — see `../cami-design/references/anti-patterns.md` → *Copy AI Tells*.
 
 ### ⚠️ AI Slop in Copy
 
@@ -76,55 +76,12 @@ The copy-side "AI tells" sweep — generic loading messages ("Herding pixels…"
 - Sentence case in UI (not Title Case) unless the brand specifies otherwise
 - Oxford comma: follow house style; be consistent
 - No trailing punctuation on buttons or labels
-- No exclamation marks in success or status messages — "Saved." not "Saved!" Reserve `!` for genuine milestones
 - Numerals for UI (use `1, 2, 3` not `one, two, three` for quantities)
+- For trailing "successfully", routine-status exclamation marks, sparkle CTAs, and other AI tells in copy: see `../cami-design/references/anti-patterns.md` → *Copy AI Tells*.
 
-## Patterns
+## Patterns, Principles, and NEVER
 
-### Error messages
-| Avoid | Prefer |
-| --- | --- |
-| "Something went wrong." | "We couldn't save your changes. Try again, or refresh the page." |
-| "Invalid input." | "Email needs an `@` and a domain." |
-| "Error 500." | "Our server had a hiccup. We've been notified — try again in a moment." |
-| "Failed to save." | "Couldn't save — try again in a moment." |
-| "Failed to remove user." | "Couldn't remove this member — try again in a moment." |
-
-**Pattern:** "Failed to…" → "Couldn't…" + next step. Shorter, warmer, always followed by what to do.
-
-### Empty states
-| Avoid | Prefer |
-| --- | --- |
-| "No results." | "Nothing matches *"[query]"*. Try broader terms or clear filters." |
-| "No items yet." | "Start by adding your first [item]. [+ button]" |
-
-### CTAs
-| Avoid | Prefer |
-| --- | --- |
-| "Submit" | "Send message" / "Create account" / "Pay $49" |
-| "Cancel" + "OK" on destructive modal | "Keep [item]" + "Delete permanently" |
-
-## The 6 Principles
-
-Every piece of copy should pass this checklist:
-
-1. **Specific** — "Enter email" not "Enter value"
-2. **Concise** — cut every word that doesn't add meaning (but never sacrifice clarity for brevity)
-3. **Active** — "Save changes" not "Changes will be saved"
-4. **Human** — "Oops, something went wrong" not "System error encountered"
-5. **Helpful** — tell users what to do, not just what happened
-6. **Consistent** — pick one term per concept and never vary it (don't alternate between "workspace" and "project" for variety)
-
-## NEVER
-- Use jargon without explanation
-- Blame the user ("You made an error" → "This field is required")
-- Be vague ("Something went wrong" without explanation or next step)
-- Use passive voice when active is possible
-- Use placeholder text as the only label — it disappears when the user types
-- Vary terminology across the product for stylistic variety — consistency beats cleverness
-- Write AI-slop loading messages (see ⚠️ section above)
-- Use humor during errors — be empathetic instead
-- Assume technical knowledge
+Concrete before/after tables (error messages, empty states, CTAs), the 6 Principles checklist, and the NEVER list all live in `../cami-design/references/copy-patterns.md`. Load that reference when applying patterns during a review — it's the canonical source.
 
 ## Output
 
@@ -134,10 +91,11 @@ Close with the walkthrough offer and (after fixes) the Verify pass — see paren
 
 ## References
 
-- `../cami-design/references/craft.md` — tone, intent, perceived performance
+- `../cami-design/references/copy-patterns.md` — canonical before/after patterns, the 6 Principles, NEVER list
 - `../cami-design/references/forms.md` — form labels, placeholders, errors, confirmations, unsaved-changes (canonical for form copy)
+- `../cami-design/references/anti-patterns.md` — canonical home for Copy AI Tells; sweep last
+- `../cami-design/references/craft.md` — tone, intent, perceived performance
 - `../cami-design/references/typography.md` — typographic characters: ellipsis, curly quotes, non-breaking spaces
-- `../cami-design/references/anti-patterns.md` — sweep last for AI tells in copy
 
 ## Human-facing writing note
 

@@ -6,6 +6,38 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.2.1 — 2026-05-14 — v2 self-audit (finish what v1 started)
+
+Re-ran the audit on the v1 state. The refactor introduced one broken pointer, left three duplications uncollapsed, and didn't apply its own "sub-skill bodies stay short" convention to copy. This release closes those gaps.
+
+### Fixed — broken cross-reference
+
+- **`interaction.md` → `forms.md` pointer.** Used `../cami-design/references/forms.md` from a file already inside `cami-design/references/` — would resolve to a non-existent path. Now just `forms.md`. Caught by the v2 audit; introduced during the v1 collapse.
+
+### Finished collapsing rule duplication
+
+- **"Apply at the root, not per-component"** (reduced-motion application rule) was said in three places. Now lives only in `accessibility.md` → *Motion*; `motion.md` and `cami-design-interaction/SKILL.md` are pure pointers.
+- **"Strip 'successfully'"** rule lived in `cami-design-copy/SKILL.md` and `anti-patterns.md`. Now only in `anti-patterns.md` → *Copy AI Tells*; copy SKILL.md points there.
+- **"No exclamation marks on routine status"** same story. Same fix.
+
+### Architecture — applied v1 convention to copy
+
+- **New `references/copy-patterns.md`.** Extracted Patterns tables (errors, empty states, CTAs) + 6 Principles + NEVER list out of `cami-design-copy/SKILL.md` into a dedicated reference. Copy sub-skill drops from 144 → ~80 lines, matching layout/interaction. Sub-skill bodies stay short; depth lives in `references/` — the convention now holds for all four sub-skills.
+
+### Engineer skill polish
+
+- **Description** updated to list all 6 dimensions explicitly. Was: *"Composition, state, a11y, perf, types, codebase fit."* Now: *"Composition, DS fidelity, state, a11y, perf, types."* "Codebase fit" was ambiguous — it could read as either DS Fidelity or the *Check Codebase Precedent First* section.
+- **Collapsed two parallel tables** of the same 6 dimensions into one. The Review Dimensions table is now the single source; References section only lists the two cross-cutting refs (accessibility principles + anti-patterns).
+- **Three new eval fixtures** added to close the dimension-coverage gap: `engineer-004` (state — missing `AbortController` cleanup), `engineer-005` (typing — `as any` cast), `engineer-006` (DS fidelity — arbitrary Tailwind values where tokens exist). Engineer now has eval coverage on all 6 dimensions (one fixture each).
+
+### Documentation polish
+
+- **`spacing-layout.md` ToC** entry for Hit Areas now reads `[Hit Areas (→ accessibility.md → Touch)]` so the section's reduced status is visible from the ToC, not a surprise on click.
+- **README evolution workflow** notes when to use `npm version patch` vs `minor` (patch for absorption-only bumps, minor for substantive restructuring like v0.2.0).
+- **Severity scale 🟣 entry** gained an example (`useMemo` wrapping `items.length` in a touched-but-not-created file) to match the format of 🔴 and 🟡.
+
+---
+
 ## 0.2.0 — 2026-05-14 — Self-audit pass (v1 cleanup)
 
 Full audit of the skill against itself surfaced 20 findings across architecture, rule overlaps, frontmatter drift, and library advertising. This release lands fixes for all of them in one pass. No new content absorbed from upstream — the change is structural.

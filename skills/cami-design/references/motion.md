@@ -227,7 +227,7 @@ Without this, scale and rotate animations on SVG shapes fly off-center in Safari
 
 ## Accessibility
 
-Respecting `prefers-reduced-motion` is an accessibility requirement, not optional. The canonical fallback snippet and the rationale (vestibular safety, what to keep vs. remove) live in `accessibility.md` → *Motion*. Apply at the root, not per-component.
+Reduced-motion fallback: see `accessibility.md` → *Motion* for the canonical snippet, the rationale (vestibular safety, what to keep vs. remove), and the application rule.
 
 ## Attribution
 

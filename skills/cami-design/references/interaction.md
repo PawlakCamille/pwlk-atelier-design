@@ -138,7 +138,7 @@ This makes toolbars and nav feel significantly faster without removing the prote
 
 ## Forms
 
-See `../cami-design/references/forms.md` for input attributes, submit behavior, error placement, placeholders, and unsaved-changes warnings.
+See `forms.md` for input attributes, submit behavior, error placement, placeholders, and unsaved-changes warnings.
 
 ## Attribution
 

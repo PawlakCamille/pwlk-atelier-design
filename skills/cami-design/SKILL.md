@@ -149,6 +149,7 @@ Loaded on demand — do not read proactively. Consult when a mode instructs you 
 | Motion | `references/motion.md` | Animation Decision Framework, easing, duration, scroll-linked, performance |
 | Interaction | `references/interaction.md` | Press, hover, focus, tooltips, drag, mobile/touch |
 | Forms | `references/forms.md` | Input attributes, labels, submit behavior, errors, placeholders, confirmations — load when reviewing form controls or form copy |
+| Copy patterns | `references/copy-patterns.md` | Before/after tables (errors, empty states, CTAs), 6 Principles, NEVER list — load for any copy work |
 | Accessibility | `references/accessibility.md` | Contrast, focus, keyboard, screen readers — canonical home for hit areas, reduced-motion fallback, contrast thresholds |
 | Anti-patterns | `references/anti-patterns.md` | "AI slop" tells in visuals and copy, generic aesthetics to avoid |
 | Craft | `references/craft.md` | Taste philosophy, why details compound |
@@ -200,7 +201,7 @@ Every finding carries a severity emoji so the user can scan the list at a glance
 | --- | --- | --- |
 | 🔴 | **Important** | Broken behavior, clear DS violation, accessibility blocker, or a craft miss the user *will* notice. Block-equivalent. |
 | 🟡 | **Nit** | Worth fixing for craft and consistency, not blocking. Cap at 5 per section; mention `+N similar` if more. |
-| 🟣 | **Pre-existing** | Diff-scoped reviews only (currently `cami-design-engineer`): the issue exists in the codebase but wasn't introduced by the current changes. Surface, don't block. Visual-design modes don't have a diff scope and use 🔴 / 🟡 only. |
+| 🟣 | **Pre-existing** | Diff-scoped reviews only (currently `cami-design-engineer`): the issue exists in the codebase but wasn't introduced by the current changes. Surface, don't block. Example: a `useMemo` wrapping `items.length` in a file the current diff touches but didn't create. Visual-design modes don't have a diff scope and use 🔴 / 🟡 only. |
 
 **Cap unit is "section."** A section is one of the lettered output groups (A, B, C…) in the review. It is *not* the same as a review *dimension* (Composition, State, Perf…). Cap at 5 nits per output section regardless of how many dimensions feed into it.
 

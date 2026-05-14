@@ -158,6 +158,42 @@
         "must_suggest": ["<button", "aria-label"],
         "must_not": ["looks good", "fine", "accessible"]
       }
+    },
+    {
+      "id": "engineer-004",
+      "mode": "cami-design-engineer",
+      "description": "Flags missing cleanup in useEffect fetch (state & data flow)",
+      "tags": ["engineer", "state", "async"],
+      "input": "Review this effect:\n\n```tsx\nuseEffect(() => {\n  fetch(`/api/users/${userId}`)\n    .then((r) => r.json())\n    .then(setUser);\n}, [userId]);\n```",
+      "expect": {
+        "must_mention": ["cleanup", "unmount", "race"],
+        "must_suggest": ["AbortController", "ignore flag", "cleanup function"],
+        "must_not": ["looks good", "fine", "correct"]
+      }
+    },
+    {
+      "id": "engineer-005",
+      "mode": "cami-design-engineer",
+      "description": "Flags `as any` hiding a type error (typing)",
+      "tags": ["engineer", "typing"],
+      "input": "Review this code:\n\n```ts\nconst user = (await fetchUser(id)) as any;\nreturn user.profile.displayName.toUpperCase();\n```",
+      "expect": {
+        "must_mention": ["as any", "type"],
+        "must_suggest": ["unknown", "type guard", "source type"],
+        "must_not": ["looks good", "fine", "acceptable"]
+      }
+    },
+    {
+      "id": "engineer-006",
+      "mode": "cami-design-engineer",
+      "description": "Flags arbitrary Tailwind value where a DS token exists (DS fidelity)",
+      "tags": ["engineer", "ds-fidelity"],
+      "input": "Review this component:\n\n```tsx\n<button className=\"bg-[#3b82f6] text-[14px] gap-[13px] px-[18px]\">\n  Continue\n</button>\n```\n\nThe project's tokens.css defines: `--color-primary-500: oklch(...);`, `--text-body-13`, `--space-3` (12px), `--space-4` (16px).",
+      "expect": {
+        "must_mention": ["arbitrary", "token", "hardcoded"],
+        "must_suggest": ["bg-primary", "text-body-13", "gap-3"],
+        "must_not": ["looks good", "fine", "acceptable"]
+      }
     }
   ]
 }

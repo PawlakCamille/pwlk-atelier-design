@@ -7,7 +7,7 @@ Deep reference for composition. Loaded on demand.
 - [The Spacing Scale](#the-spacing-scale)
 - [Concentric Border Radius](#concentric-border-radius)
 - [Optical vs Geometric Alignment](#optical-vs-geometric-alignment)
-- [Hit Areas](#hit-areas)
+- [Hit Areas (→ accessibility.md → Touch)](#hit-areas)
 - [Shadows Over Borders](#shadows-over-borders)
 - [Image Outlines](#image-outlines)
 - [Scrollbar Gutter](#scrollbar-gutter)

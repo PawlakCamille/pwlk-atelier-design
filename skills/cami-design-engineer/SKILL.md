@@ -1,6 +1,6 @@
 ---
 name: cami-design-engineer
-description: Composition, state, a11y, perf, types, codebase fit. Use before handoff to a tech team or for a senior front-end code review.
+description: Composition, DS fidelity, state, a11y, perf, types. Use before handoff to a tech team or for a senior front-end code review.
 user-invocable: true
 argument-hint: "[target]"
 ---
@@ -116,13 +116,9 @@ Close with the walkthrough offer and (after fixes) the Verify pass — see paren
 
 ## References
 
-- `../cami-design/references/composition.md` — component shape, prop surface, state location
-- `../cami-design/references/ds-fidelity.md` — code-level DS violations (pairs with parent's Design System Protocol)
-- `../cami-design/references/state.md` — effects, async, race conditions, fetching
-- `../cami-design/references/a11y-implementation.md` — code-level a11y findings (pairs with `accessibility.md` principles)
-- `../cami-design/references/perf.md` — rendering, memoization, bundle, hot handlers
-- `../cami-design/references/typing.md` — TypeScript discipline, file naming, comments
-- `../cami-design/references/accessibility.md` — a11y principles (contrast, focus, screen readers)
-- `../cami-design/references/anti-patterns.md` — generic / "AI slop" tells, some apply at code level
+The six dimension references are listed in the *Review Dimensions* table above — load each when the diff touches its area. Two shared references also apply:
+
+- `../cami-design/references/accessibility.md` — a11y principles (contrast, focus, screen readers) that pair with `a11y-implementation.md`
+- `../cami-design/references/anti-patterns.md` — generic / "AI slop" tells, some apply at code level (`h-screen` → `100dvh`, mixed icon stroke weights, etc.)
 
 External upstream sources (Anthropic Code Review, Vercel Composition Patterns, Vercel React Best Practices) are credited in `NOTICE.md`.
