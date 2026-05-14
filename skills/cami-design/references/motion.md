@@ -8,12 +8,14 @@ Before writing any animation, answer in order:
 
 ### 1. Should this animate at all?
 
-| Frequency | Decision |
-| --- | --- |
-| 100+ times/day | No animation. |
-| Tens of times/day | Remove or drastically reduce. |
-| Occasional | Standard animation. |
-| Rare / first-time | Can add delight. |
+| Frequency | Examples | Decision |
+| --- | --- | --- |
+| 100+ times/day | Keyboard shortcuts, command palette | **No animation.** Ever. |
+| Tens of times/day | Hover, list nav | Remove or drastically reduce. |
+| Occasional | Modals, drawers, toasts | Standard animation. |
+| Rare / first-time | Onboarding, celebrations, first-run | Can add delight. |
+
+**Never animate keyboard-initiated actions.** They are repeated so often that animation feels like latency.
 
 **Raycast has no open/close animation.** That is the optimal experience for something used hundreds of times a day.
 
