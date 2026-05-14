@@ -1,6 +1,6 @@
 ---
 name: cami-design-engineer
-description: Composition, DS fidelity, state, a11y, perf, types. Use before handoff to a tech team or for a senior front-end code review.
+description: Composition, DS fidelity, state, cross-file completeness, a11y, i18n, perf, security, types. Use before handoff to a tech team or for a senior front-end code review.
 user-invocable: true
 argument-hint: "[target]"
 ---
@@ -20,7 +20,7 @@ A code review for design engineers, not for engineers. The goal is a clean hando
 - End of a project, before the tech team takes it over
 - A polish pass on a vibe-coded prototype that "works but isn't ready to ship"
 - The same JSX shape shows up in 3+ files and needs consolidating
-- You want one pass that covers composition, design system, state, a11y, perf, and types
+- You want one pass that covers composition, design system, state, cross-file completeness, a11y, i18n, perf, security, and types
 
 This skill reviews **code**. For visual judgement (spacing, motion, copy), use `cami-design-layout`, `cami-design-interaction`, or `cami-design-copy`.
 
@@ -30,9 +30,10 @@ This skill reviews **code**. For visual judgement (spacing, motion, copy), use `
 2. Read the linter/formatter config (biome, eslint, prettier). **Skip anything CI already enforces.**
 3. Locate the design system: tokens file, Tailwind config, DS components directory, any `DESIGN.md`.
 4. Check type strictness: `tsconfig.json`, project convention on `type` vs `interface`, presence of `as any`.
-5. Scope to changed code by default (`git diff <base>...HEAD`). Exclude generated files, lockfiles, vendored dependencies, and test fixtures. Full-file review only if the user asks.
-6. If the diff exceeds ~400 changed lines (excluding generated and lockfiles), ask the user to scope the review by feature or file before continuing. Wide reviews lose signal.
+5. Validate the diff base, then scope. Run `git rev-parse <base> origin/<base>` — if the local base ref is behind the remote, `git fetch` and diff against `origin/<base>`, or recommend a rebase; a stale base inflates the apparent diff and hides commits the branch is missing. Then scope to changed code (`git diff <base>...HEAD`), excluding generated files, lockfiles, vendored dependencies, and test fixtures. Full-file review only if the user asks.
+6. If the diff exceeds ~400 changed lines (excluding generated and lockfiles), ask the user to scope the review by feature or file before continuing. Wide reviews lose signal. Exception: when the PR's stated scope is "migrate N call sites to a new pattern," search *every* site even past the cap — the output still caps at 5 nits per section, but a `+N similar` count must be real, not sampled.
 7. If the project has an E2E test suite (`e2e/`, `playwright/`, `cypress/`…), grep it for `data-testid` selectors before flagging refactors. Removing or renaming a referenced testid breaks the test silently. Note any testid changes in the review.
+8. If the review target is a PR, read its body (`gh pr view`) and compare the scope it claims against the actual diff. A description that says something is deferred when it's bundled — or vice-versa — sets the reviewer up on a wrong premise. Flag the mismatch as a pre-merge action item.
 
 ## Check Codebase Precedent First
 
@@ -48,15 +49,18 @@ Especially relevant for: utilities and hooks (`useDebounce`, `cn`, formatters), 
 
 ## Review Dimensions
 
-Six dimensions. Each has a dedicated reference file with the concrete findings to flag. Load a dimension's reference when the diff touches that area; skip dimensions with no signal.
+Nine dimensions. Each has a dedicated reference file with the concrete findings to flag. Load a dimension's reference when the diff touches that area; skip dimensions with no signal.
 
 | Dimension | Reference | Load when |
 | --- | --- | --- |
 | Component Composition | `../cami-design/references/composition.md` | Component shape, prop surface, state location, compound patterns |
-| Design System Fidelity | `../cami-design/references/ds-fidelity.md` | New or modified styled components, raw color/spacing values, DS imports |
-| State & Data Flow | `../cami-design/references/state.md` | `useState`, `useEffect`, async work, shared data fetching |
+| Design System Fidelity | `../cami-design/references/ds-fidelity.md` | New or modified styled components, raw color/spacing values, DS imports, public API changes |
+| State & Data Flow | `../cami-design/references/state.md` | `useState`, `useEffect`, async work, shared data fetching, state changing owner |
+| Cross-file Completeness | `../cami-design/references/cross-file-completeness.md` | The diff adds a union member — variant, status, tab, plan tier, role, feature flag — or moves/renames a module |
 | A11y Implementation | `../cami-design/references/a11y-implementation.md` | Any interactive element, form, modal, image, custom widget |
-| Performance & Rendering | `../cami-design/references/perf.md` | Lists, memoization, animations, heavy state, hot handlers |
+| Internationalization | `../cami-design/references/i18n.md` | User-facing strings, dates, numbers, `aria-label`/`alt` text in a project with a translation layer |
+| Performance & Rendering | `../cami-design/references/perf.md` | Lists, memoization, animations, heavy state, hot handlers, loading skeletons |
+| Security Spot-Check | `../cami-design/references/security.md` | `dangerouslySetInnerHTML`, external links, clipboard/file/camera APIs, logged or persisted values |
 | Type Safety & Code Clarity | `../cami-design/references/typing.md` | TypeScript annotations, file naming, comments, magic numbers |
 
 Each finding goes into the `Before | After | Why` table format defined in **Output**.
@@ -75,6 +79,8 @@ See parent skill `Review Output Format → Severity scale` for the full table an
 
 Every finding cites `file:line` from the actual code. No flagging based on naming or inference. If you can't point to the line, drop the finding.
 
+The same bar applies in the other direction — to **non-findings**. Don't make positive safety claims you haven't checked. If you write "this pattern is safe," cite the line that proves it; if you write "handled elsewhere," read that elsewhere and cite it. Never "likely handled," "probably tested," "should be fine." Either verify with a citation or flag it as unverified. *"This looks fine"* is not a finding — and it is not a clean bill of health either.
+
 ### Re-review convergence
 
 Second pass over the same code: suppress new nits, post Important findings only.
@@ -85,7 +91,7 @@ Open with a one-line tally:
 
 > **Tally:** X 🔴 important · Y 🟡 nit · Z 🟣 pre-existing.
 
-If nothing is Important, lead with `No blocking issues for handoff.` before the tally.
+If nothing is Important, lead with `No blocking issues for handoff.` before the tally. When the audit is clean of Important findings, you may also add a short `## Verified` block listing 3–5 conventions or invariants that were checked and held — Conventional Commits, DS tokens, React 19 idioms, no AI attribution. For a handoff review, naming what was checked and passed reassures the receiving team. Keep it factual, not a victory lap.
 
 Then group findings using the lettered-section format from the parent skill. Title each section from what was actually found, not from the dimension name.
 
@@ -99,7 +105,9 @@ Then group findings using the lettered-section format from the parent skill. Tit
 
 Inline code snippets go inside the After cell — never break out of the table.
 
-Close with the walkthrough offer and (after fixes) the Verify pass — see parent skill `Review Output Format → Closing / Walkthrough mode / Verify pass`.
+Always close with a **Test coverage** line, whatever the severity counts: enumerate the testable surfaces the diff introduced — hooks, utilities, pure functions with branching — by name and `file:line`, e.g. `formatPrice (3 branches), useFilteredList edge cases`. Don't write the tests; the named list is the deliverable for the tech team. "No tests written" can be acceptable for the PR — an empty enumeration is not.
+
+Then close with the walkthrough offer and (after fixes) the Verify pass — see parent skill `Review Output Format → Closing / Walkthrough mode / Verify pass`.
 
 ## NEVER
 
@@ -116,7 +124,7 @@ Close with the walkthrough offer and (after fixes) the Verify pass — see paren
 
 ## References
 
-The six dimension references are listed in the *Review Dimensions* table above — load each when the diff touches its area. Two shared references also apply:
+The nine dimension references are listed in the *Review Dimensions* table above — load each when the diff touches its area. Two shared references also apply:
 
 - `../cami-design/references/accessibility.md` — a11y principles (contrast, focus, screen readers) that pair with `a11y-implementation.md`
 - `../cami-design/references/anti-patterns.md` — generic / "AI slop" tells, some apply at code level (`h-screen` → `100dvh`, mixed icon stroke weights, etc.)

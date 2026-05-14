@@ -70,6 +70,14 @@ Multiple components each call `window.addEventListener('scroll' / 'resize' / 'ke
 
 O(n) lookup repeated for every item is O(n²). Build a `Set` (membership) or `Map` (key→value) once, then look up in O(1).
 
+## Skeleton Sized Differently From Its Content
+
+A `Skeleton` or placeholder sits in the same render path as the real content, but its size or radius doesn't match the component that replaces it — `Skeleton size-8 rounded-xl` swapped for `Avatar size="md"`. The mismatch produces a layout shift the moment content loads. Match the skeleton's dimensions and shape to the eventual component's tokens.
+
+## Empty-String Fallback on a DOM Attribute
+
+`<img src={url ?? ''} />` — an empty `src` makes the browser re-request the current page URL and log an error; an empty `href` or `action` carries similar footguns. Return `undefined` and render the attribute (or the whole element) conditionally, instead of falling back to `''`.
+
 ## Attribution
 
 Synthesized from Vercel Labs `react-best-practices`, MDN, and Anthropic React docs.

@@ -161,8 +161,11 @@ Loaded on demand — do not read proactively. Consult when a mode instructs you 
 | Component Composition | `references/composition.md` | Component shape, prop surface, state location, compound patterns |
 | Design System Fidelity (code) | `references/ds-fidelity.md` | Code-level DS violations — pairs with Design System Protocol above |
 | State & Data Flow | `references/state.md` | Effects, async cleanup, race conditions, fetching, prop mutation |
+| Cross-file Completeness | `references/cross-file-completeness.md` | A new union member, or a moved/renamed module — and the unchanged code that referenced it |
 | A11y Implementation | `references/a11y-implementation.md` | Code-level a11y findings — pairs with `accessibility.md` principles |
-| Performance & Rendering | `references/perf.md` | Keys, memoization, animation cost, hot handlers, list lookups |
+| Internationalization | `references/i18n.md` | Hardcoded user-facing strings, non-locale-aware dates/numbers, English in the a11y tree |
+| Performance & Rendering | `references/perf.md` | Keys, memoization, animation cost, hot handlers, list lookups, skeleton parity |
+| Security Spot-Check | `references/security.md` | HTML injection, external link `rel`, browser API scope, leaked values |
 | Type Safety & Code Clarity | `references/typing.md` | TS discipline, file naming, magic numbers, comments |
 
 ## Shared Libraries

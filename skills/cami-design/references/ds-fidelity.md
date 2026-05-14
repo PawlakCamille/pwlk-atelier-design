@@ -24,9 +24,17 @@ A one-off color or spacing value used in code that isn't in the DS. Flag as a ga
 
 Conditional classes that fight the DS defaults. Use the variant prop the DS already exposes.
 
+## `!important` in New CSS
+
+Almost always a specificity escape hatch covering a conflict with the design system's own rules. Resolve the specificity properly — refactor the selector, fix the cascade order, or use the DS variant prop — rather than nailing the override in place. Rare legitimate uses (utility classes, third-party overrides) should carry a comment with the reason.
+
 ## Generic Tailwind Utilities Where the Project Has a Typed Scale
 
 `font-bold`, `text-sm` on a project that defines `text-body-13`, `text-heading-24`. Use the typed scale.
+
+## Spec Doc Drift After an API Change
+
+The diff changed a component's public API — a prop removed, made optional, renamed, a signature changed — but `DESIGN.md` (or `docs/`, `README.md`) still describes the old shape. Grep the spec for the component name and update it in the same pass. A stale source-of-truth doc quietly undoes the API improvement.
 
 ## Attribution
 

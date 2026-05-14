@@ -36,6 +36,18 @@ A compound component where `<Tabs.Trigger>` imports a Zustand store directly or 
 
 Context value with `setActiveTab`, `setOpen`, `setValue` instead of `select`, `toggle`, `change`. Refactor to a `{ state, actions, meta }` shape so the provider can be swapped for testing or a different state lib without rewriting consumers.
 
+## `useContext` in React 19 Code
+
+`useContext(Ctx)` still works, but React 19's `use(Ctx)` is the current idiom — it reads context inside conditionals and loops without a rules-of-hooks violation. Prefer `use()` for new context reads in a React 19 codebase.
+
+## A Primitive Owning a Consumer's Concern
+
+A low-level or presentational component reaching into `localStorage`, analytics, routing, or another side-effecting concern the consumer should own — a collapsible-panel primitive that persists its own open/closed state. The primitive should take state and callbacks as props and stay pure; persistence and side effects belong to the feature that mounts it. Otherwise every consumer inherits a behavior it didn't ask for and can't opt out of.
+
+## Conditional Render That Unmounts Children
+
+`{open && <Panel>{children}</Panel>}` fully unmounts the subtree when `open` is false — any child with internal state (an input, a controlled field, scroll position, a running animation) loses it on every toggle. For a reusable component, keep children mounted and hide with `hidden` / `display: none`, so consumers can place stateful content inside without surprise.
+
 ## Attribution
 
 Synthesized from Vercel Labs `composition-patterns` skill, with React 19 specifics from Anthropic React docs.
