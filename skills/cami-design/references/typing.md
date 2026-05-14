@@ -22,9 +22,17 @@ New `index.ts` re-export added where the convention is direct imports.
 
 Delete. Keep only comments that explain *why* a non-obvious choice was made (a workaround, a constraint, an invariant).
 
+## Comment or JSDoc Describing Old Behavior
+
+The diff changed what the code does but left the comment describing the old behavior — a JSDoc that says `className` lands on the tab list when it now lands on the outer wrapper. A wrong comment is worse than no comment: it actively misleads. When a change alters behavior, update or delete every comment in range.
+
 ## Magic Numbers
 
 A `7` or `0.85` in the middle of code with no name. Extract to a named constant.
+
+## Function Name Promises Behavior It Doesn't Deliver
+
+`triggerFileDownload` that builds a blob URL and returns it — triggering nothing; the caller does the download. A name claiming a side effect the function doesn't perform sends every reader looking in the wrong place. Name it for what it does (`buildFileBlobUrl`), or make it do what the name says.
 
 ## Files / Directories Not in kebab-case
 
@@ -33,6 +41,10 @@ If the project convention requires kebab-case, rename. Mixed casing causes impor
 ## `function foo()` Where the Convention Is Arrow Functions
 
 Stay consistent with the project's existing style.
+
+## Test-Only Logic in Production Code
+
+A production module carrying test-mode branches, stub credentials, or `if (import.meta.env.TEST)` paths — a `supabase.ts` that falls back to a stub url/key "so the module loads in tests." The stub belongs at the test boundary (`vi.mock`, a setup file, `.env.test`), not shipped in the module. Test scaffolding in production code is dead weight at best and a wrong-environment hazard at worst.
 
 ## Untested Business Logic
 

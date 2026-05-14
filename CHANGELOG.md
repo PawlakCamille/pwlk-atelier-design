@@ -6,6 +6,49 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.2.2 — 2026-05-14 — engineer skill: absorb review-quality findings
+
+Three sources, one release. (1) Skill-comparison reports — `cami-design-engineer` run head-to-head with `/review` and `vercel-composition-patterns` on real-world feature PRs. (2) `5988d0c`, an unpushed local commit from 2026-05-09 that absorbed three patterns from garrytan/gstack but never reached `main`. (3) Code-review feedback collected across a batch of production PRs. `vercel-composition-patterns` surfaced almost nothing net-new; the comparison reports, gstack, and the production review feedback carried the signal.
+
+### New dimensions
+
+- **Security Spot-Check** → `references/security.md`. Four checks only — HTML injection, external link `rel`, browser API scope, leaked values. Not a full audit, just the checklist a receiving tech team expects to have been run. Source: Anthropic Code Review security pass, surfaced by the comparison reports.
+- **Cross-file Completeness** → `references/cross-file-completeness.md`. The one dimension that requires reading code outside the diff: when the diff adds a union member (variant, status, tier, flag) or moves/renames a module, grep the siblings and read the consumers — `switch` chains, allowlists, config maps, stale test mocks that silently drop the new value. Source: garrytan/gstack `review` (Enum & Value Completeness); module-move check from production PR review feedback.
+- **Internationalization** → `references/i18n.md`. Hardcoded user-facing strings, non-locale-aware date/number formats, and English leaking into the a11y tree (`aria-label`, `alt`) — for codebases with a translation layer. Source: production PR review feedback.
+
+The engineer skill now has nine dimensions, up from six.
+
+### Reference additions
+
+- **`ds-fidelity.md` → Spec Doc Drift After an API Change.** When the diff changes a component's public API, grep `DESIGN.md` / docs for the component and update it in the same pass — a stale source-of-truth doc undoes the API change. Surfaced by a comparison report: an a11y refactor made a component prop optional while the spec doc still listed it as required.
+- **`ds-fidelity.md` → `!important` in New CSS.** Almost always a specificity escape hatch covering a DS conflict that should be resolved properly. Source: garrytan/gstack `review`.
+- **`perf.md` → Skeleton Sized Differently From Its Content.** A skeleton whose size or radius doesn't match the component that replaces it produces a layout shift on load. Surfaced in review: a 32px skeleton placeholder swapped for a 20px component.
+- **`state.md` → State Moved Between Owners.** When state changes hands (local ↔ URL ↔ context ↔ props), re-audit every consumer that assumed the old contract. From a routing-contract edge case found in review.
+- **`composition.md` → `useContext` in React 19 Code.** Prefer `use(Ctx)` over `useContext(Ctx)` in React 19. The one net-new angle from the `vercel-composition-patterns` comparison.
+
+### Engineer SKILL.md — process
+
+- **Base-ref validation** (Preparation 5). `git rev-parse <base> origin/<base>` before scoping — a stale local base inflates the diff. From a review where the local base branch was dozens of commits behind the remote.
+- **Exhaustive coverage for migration PRs** (Preparation 6). For "migrate N sites" PRs, search every site; a `+N similar` count must be real, not sampled.
+- **PR-description-vs-diff check** (Preparation 8). Read the PR body, flag scope claims that disagree with the diff.
+- **Verification bar extended to non-findings** (Output). No positive safety claims without a citation — no "likely handled," "probably fine." Either cite the line or flag it unverified. Source: garrytan/gstack `review`.
+- **Test-coverage closer** (Output). Every review now closes with a named enumeration of the testable surfaces the diff introduced — a recurring miss flagged across multiple reviews. The list is the deliverable, not the tests.
+- **Optional `## Verified` opener** (Output). When clean of Important findings, the review may list 3–5 conventions checked and held — reassurance for handoff.
+
+### From production PR review feedback
+
+Patterns that came up repeatedly in code review on production PRs. The recurring themes — test-coverage enumeration, description-vs-diff drift — were already covered by the items above; these are the net-new ones:
+
+- **`typing.md` → Test-Only Logic in Production Code.** Stub credentials or test-mode branches shipped in a production module belong at the test boundary (`vi.mock`, a setup file).
+- **`typing.md` → Comment or JSDoc Describing Old Behavior.** A change that alters behavior must update or delete the comments in range — a wrong comment misleads.
+- **`typing.md` → Function Name Promises Behavior It Doesn't Deliver.** A `triggerX` that triggers nothing.
+- **`composition.md` → A Primitive Owning a Consumer's Concern.** A presentational component reaching into `localStorage` / analytics / routing the consumer should own.
+- **`composition.md` → Conditional Render That Unmounts Children.** `{open && children}` silently drops child state on toggle — keep mounted, hide with `hidden`.
+- **`cross-file-completeness.md` → Module Moved or Renamed.** Stale references left behind, most silently in test mocks pointing at the old path.
+- **`perf.md` → Empty-String Fallback on a DOM Attribute.** `<img src={url ?? ''} />` re-requests the page; return `undefined` and render conditionally.
+
+---
+
 ## 0.2.1 — 2026-05-14 — v2 self-audit (finish what v1 started)
 
 Re-ran the audit on the v1 state. The refactor introduced one broken pointer, left three duplications uncollapsed, and didn't apply its own "sub-skill bodies stay short" convention to copy. This release closes those gaps.
@@ -197,7 +240,7 @@ When `cami-design` runs as a full audit (3 visual-design sub-skills), it now off
 - **vercel-labs/agent-skills/react-best-practices** (MIT) — 17 of 45 rules; Next/SSR-only and micro-opts deliberately skipped
 - **wshobson/agents/code-review-excellence** — PR size guard, props mutation
 - **mistyhx/frontend-design-audit** — severity calibration framework, Verify step
-- **themobilefirstco/desktop-allo CI claude-code-review.yml** — untested business logic flagging, E2E testid awareness
+- **Internal CI code-review workflow** (maintained by the author) — untested business logic flagging, E2E testid awareness
 
 ### Reviewed and not absorbed
 

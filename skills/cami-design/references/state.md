@@ -46,6 +46,10 @@ Each component fires its own request for the same data. Use a request library th
 
 `user.lastViewed = new Date()` inside a component modifies data the parent owns — bugs propagate sideways and React doesn't see the change. Treat props as read-only. If something must change, notify the parent via a callback (`onView(user.id)`) and let it update its own state.
 
+## State Moved Between Owners
+
+A piece of state changed hands — local → URL, local → context, child → parent. Every consumer that assumed the old owner is now reasoning about a stale contract: a `to: '.'` route that relied on a local `view` flag, an effect keyed on a prop that's now derived from search params. The move itself is usually correct; the un-updated consumers are the bug. Re-audit all of them.
+
 ## Attribution
 
 Synthesized from Vercel Labs `react-best-practices`, with stale-state and sort traps from Anthropic React docs.

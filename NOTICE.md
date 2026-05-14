@@ -129,16 +129,16 @@ Contributions absorbed (May 2026):
 
 License: see upstream.
 
-### themobilefirstco/desktop-allo — CI claude-code-review.yml
-Source: https://github.com/themobilefirstco/desktop-allo/blob/main/.github/workflows/claude-code-review.yml
+### Internal CI code-review workflow
+A private continuous-integration code-review prompt, maintained by the author.
 
 Contributions absorbed (May 2026, into `cami-design-engineer`):
 - Untested business logic flagging — flag hooks/utilities/services with branching logic that lack tests, naming the function and branches that need coverage (don't write the tests; surface the gap for the tech team)
 - E2E testid awareness — grep `e2e/` for `data-testid` selectors before flagging refactors that remove or rename them; testid changes break E2E silently
 
-The workflow itself is internal; the prompt's review philosophy informed the engineer skill.
+The workflow itself is internal; only its review philosophy informed the engineer skill.
 
-License: internal repo, used with author's permission as the maintainer of both repos.
+License: internal, used with the author's permission.
 
 ### vercel-labs/web-interface-guidelines
 Author: Vercel Labs
