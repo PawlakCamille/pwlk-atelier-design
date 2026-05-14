@@ -50,7 +50,3 @@ Every piece of copy should pass this checklist:
 - Write AI-slop copy (generic loading messages, trailing "successfully", sparkle CTAs, etc.) — see `anti-patterns.md` → *Copy AI Tells*
 - Use humor during errors — be empathetic instead
 - Assume technical knowledge
-
-## Attribution
-
-Extracted from `cami-design-copy/SKILL.md` during v2.1 architecture cleanup — sub-skill bodies stay short, depth lives here.
