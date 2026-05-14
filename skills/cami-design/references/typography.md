@@ -74,7 +74,7 @@ Starting points — always check the design system first. If tokens exist for le
 ## Accessibility
 
 - Minimum body size: 16px on web.
-- Minimum contrast: 4.5:1 for body text, 3:1 for large text (≥ 18.66px or 14px bold).
+- Contrast thresholds: see `accessibility.md` → *Contrast (WCAG) — canonical* for the full table.
 - Don't rely on color alone for emphasis.
 - **Use `rem` not `px` for font sizes.** `px` is absolute — if a user sets their browser font size to 20px for accessibility reasons, `px` values ignore it. `rem` scales with their preference. WCAG requires text to be zoomable to 200% without loss of content; `rem` guarantees this natively.
 

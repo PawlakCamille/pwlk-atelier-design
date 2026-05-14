@@ -1,13 +1,16 @@
 # Accessibility
 
-Deep reference. Loaded on demand.
+Deep reference. Loaded on demand. Canonical home for: contrast ratios, hit areas, reduced-motion fallback, focus rules, screen-reader semantics.
 
-## Contrast (WCAG)
+## Contrast (WCAG) — canonical
+
+These thresholds are referenced from `color.md` and `typography.md` — update here, the others point to this section.
 
 - Body text: ≥ 4.5:1
 - Large text (≥ 18.66px or 14px bold): ≥ 3:1
 - Interactive element boundaries: ≥ 3:1
 - Focus indicators: ≥ 3:1 against adjacent colors
+- Placeholder text: ≥ 4.5:1 (commonly missed — the default light gray usually fails)
 
 ## Focus
 
@@ -34,15 +37,42 @@ Deep reference. Loaded on demand.
 - Live regions (`aria-live`) for async updates the user should hear. Use `polite` for non-urgent updates (success messages, counts); `assertive` for critical errors only — it interrupts immediately.
 - Prefer `aria-disabled="true"` over the `disabled` attribute for buttons that should stay in the tab order (e.g. a submit button that's temporarily blocked). `disabled` removes the element from keyboard navigation entirely.
 
-## Motion
+## Motion — canonical reduced-motion fallback
 
-- Respect `prefers-reduced-motion` — but reduced motion ≠ no motion. Keep opacity and color transitions that aid comprehension. Remove movement, position changes, and large transforms.
-- Vestibular disorders are real — parallax and big transforms can cause nausea.
+Respect `prefers-reduced-motion`. Reduced motion ≠ no motion — keep opacity and color transitions that aid comprehension; remove movement, position changes, and large transforms. Vestibular disorders are real; parallax and big transforms can cause nausea.
 
-## Touch
+Apply this once at the root, not per-component:
 
-- Minimum 40×40px hit areas.
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+Referenced from `motion.md` and `cami-design-interaction/SKILL.md`.
+
+## Touch — canonical hit area rule
+
+- Minimum 40×40px hit areas, regardless of visible element size.
 - Adequate spacing between interactive elements — 8px minimum between tap targets.
+- Never overlap hit areas of adjacent interactive elements.
+- Extend via pseudo-element when the visible element is smaller:
+
+```css
+position: relative;
+&::before {
+  content: '';
+  position: absolute;
+  inset: -8px; /* expands hit area */
+}
+```
+
+Referenced from `spacing-layout.md` and `interaction.md`.
 
 ## Color
 

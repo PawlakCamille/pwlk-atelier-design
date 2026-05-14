@@ -24,6 +24,8 @@ Never `onPaste={e => e.preventDefault()}`. Users paste passwords from managers, 
   - `<label htmlFor="email">Email</label><input id="email" />`
   - or `<label>Email<input /></label>` (wrapping)
 - **Checkboxes and radios:** the label and control share one hit target, not just visually adjacent. Clicking anywhere on the row toggles the input. No dead zones between the box and its text.
+- **Instructions go before the field, not after.** Users read the label, then need the rule before they type, not after.
+- Format hints belong in placeholder examples or helper text, never as the only label.
 
 ## Submit Behavior
 
@@ -54,6 +56,12 @@ Warn before navigation when the user has unsaved data.
 - `beforeunload` event for full page navigations and tab close
 - Keep the warning specific: *"Leave this page? Your changes haven't been saved."* Not generic *"Are you sure?"*
 
+## Confirmation Dialogs
+
+- State the **specific action + consequence**: *"Delete 'Project Alpha'? This can't be undone."* — never *"Are you sure?"*
+- Destructive button labels match the action: *"Delete project"* not *"Yes"* or *"OK"*. The cancel side reflects the safe action: *"Keep project"* beats *"Cancel"*.
+- For destructive actions, put the identifying data (name, ID, amount) on its own line, bolded, not inline at the end of a sentence — see `spacing-layout.md` → *Identifying data in destructive confirmations*.
+
 ## Attribution
 
-Synthesized from Vercel Labs `web-interface-guidelines` (Forms section).
+Synthesized from Vercel Labs `web-interface-guidelines` (Forms section); confirmation patterns absorbed from `cami-design-copy` consolidation.

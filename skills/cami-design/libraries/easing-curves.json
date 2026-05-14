@@ -1,9 +1,21 @@
 {
-  "description": "Curated easing curves. Pick by scenario, not by aesthetic preference.",
+  "description": "Canonical easing values consumed by references/motion.md. Update here first; the markdown table mirrors these values for teaching. Pick by scenario, not by aesthetic preference.",
+  "consumed_by": [
+    "../references/motion.md",
+    "../../cami-design-interaction/SKILL.md"
+  ],
   "curves": {
     "ease-out-quart": {
       "value": "cubic-bezier(0.25, 1, 0.5, 1)",
       "use_for": "entering elements, default UI reveal"
+    },
+    "ease-out-snappy": {
+      "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+      "use_for": "entering elements, snappier feel"
+    },
+    "ease-out-decisive": {
+      "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "use_for": "entering elements, confident and decisive"
     },
     "ease-out-soft": {
       "value": "cubic-bezier(0.2, 0, 0, 1)",
@@ -33,5 +45,10 @@
     "state_change": [200, 250],
     "modal_enter": [250, 350],
     "avoid_above": 400
+  },
+  "forbidden": {
+    "bounce_elastic": "cubic-bezier(0.34, 1.56, ...) and similar — feel dated and draw attention to the animation itself",
+    "linear_for_spatial": "linear is reserved for progress bars and time-based representations; never for spatial motion",
+    "ease_in_for_ui": "ease-in starts slow exactly when the user is watching most closely — feels slower than ease-out at the same duration"
   }
 }

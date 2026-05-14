@@ -1,6 +1,6 @@
 {
   "name": "cami-design",
-  "version": "0.1.24",
+  "version": "0.2.0",
   "description": "Camille Pawlak's Claude Code design skill — layout, interaction, copy, and engineer modes for building, reviewing, and shipping interfaces with intent.",
   "keywords": [
     "claude",
@@ -28,7 +28,8 @@
     "eval": "node scripts/eval.js",
     "eval:layout": "node scripts/eval.js --mode layout",
     "eval:interaction": "node scripts/eval.js --mode interaction",
-    "eval:copy": "node scripts/eval.js --mode copy"
+    "eval:copy": "node scripts/eval.js --mode copy",
+    "eval:engineer": "node scripts/eval.js --mode engineer"
   },
   "engines": {
     "node": ">=16"

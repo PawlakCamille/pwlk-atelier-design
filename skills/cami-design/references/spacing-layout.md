@@ -56,9 +56,7 @@ When in doubt, trust your eye over the math.
 
 ## Hit Areas
 
-- Minimum 40×40px, regardless of visible element size.
-- Extend via pseudo-element if the visible element is smaller.
-- Never let hit areas of adjacent interactive elements overlap.
+See `accessibility.md` → *Touch* for the canonical 40×40 rule, spacing, and pseudo-element technique. The same content used to live here too; collapsed to a pointer to avoid drift.
 
 ## Shadows Over Borders
 

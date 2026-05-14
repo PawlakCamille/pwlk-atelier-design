@@ -6,6 +6,68 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.2.0 — 2026-05-14 — Self-audit pass (v1 cleanup)
+
+Full audit of the skill against itself surfaced 20 findings across architecture, rule overlaps, frontmatter drift, and library advertising. This release lands fixes for all of them in one pass. No new content absorbed from upstream — the change is structural.
+
+### Architecture
+
+- **Clarified parent's dual role.** Added a `## Roles` section to `cami-design/SKILL.md` distinguishing **read mode** (sub-skill loads parent for shared rules) from **run mode** (`/cami-design` invoked bare runs a full audit). Sub-skills no longer say "MANDATORY PREPARATION: Invoke cami-design" — they now say "Required reading: load `../cami-design/SKILL.md`," which removes the recursion ambiguity flagged in the audit.
+
+### Rule duplication collapsed
+
+The same rule existed in multiple files for several topics. Each now has one canonical home; the others point to it.
+
+- **Animation Decision Framework** → `references/motion.md` (was duplicated in `cami-design-interaction/SKILL.md`)
+- **Hit areas (40×40)** → `references/accessibility.md` → *Touch* (was in `spacing-layout.md` + `interaction.md` + `accessibility.md`)
+- **Reduced-motion fallback snippet** → `references/accessibility.md` → *Motion* (was in `cami-design-interaction/SKILL.md` + `motion.md` + `accessibility.md`)
+- **Contrast thresholds (WCAG)** → `references/accessibility.md` → *Contrast — canonical* (was in `color.md` + `typography.md` + `accessibility.md`)
+- **"Check tokens first" Design System rule** → parent SKILL.md → *Design System Protocol* (was in parent + `color.md` + `cami-design-engineer`)
+- **Form copy patterns** (instructions before field, confirmation wording, destructive labels) → `references/forms.md` (was in `cami-design-copy/SKILL.md`)
+- **Copy AI tells** (generic loading copy, "successfully" trailing, sparkle CTAs) → `references/anti-patterns.md` → *Copy AI Tells* (was inlined in `cami-design-copy/SKILL.md`)
+
+### Engineer skill rebuilt as a router
+
+`cami-design-engineer/SKILL.md` dropped from 194 lines of inlined dimension content to a thin router pointing at six new reference files — matching the pattern used by the visual sub-skills. Future absorptions for the engineer pass now have somewhere to land that isn't the SKILL.md body.
+
+- New `references/composition.md` — boolean prop sprawl, render-prop overuse, compound patterns, lifted state
+- New `references/state.md` — effects, async cleanup, race conditions, request dedup, prop mutation
+- New `references/perf.md` — keys, memoization traps, hot handlers, list lookups, animation cost
+- New `references/typing.md` — `as any`, project conventions, magic numbers, kebab-case
+- New `references/a11y-implementation.md` — code-level a11y findings (pairs with `accessibility.md` principles)
+- New `references/ds-fidelity.md` — code-level DS violations (pairs with parent's *Design System Protocol*)
+
+### Engineer eval coverage
+
+Engineer mode had no eval cases. Added three (`engineer-001` boolean prop sprawl, `engineer-002` index-as-key, `engineer-003` `<div onClick>`) and a `npm run eval:engineer` script. Fixed a pre-existing bug in the eval runner: the per-mode npm scripts passed short names (`--mode layout`) that never matched the long-form `mode` field in fixtures; runner now normalises both.
+
+### Severity scale normalised
+
+- Single source of truth in parent `Review Output Format → Severity scale`. Engineer skill no longer duplicates the scale — it references the parent and only documents the 🟣 case.
+- Clarified the cap unit. The rule is "5 nits per output **section**" (the lettered groups A, B, C…), not "per **dimension**." A short note explains the difference. Engineer dimensions feed into output sections, not the other way around.
+- 🟣 *Pre-existing* now explicitly scoped to diff-based reviews (currently only engineer mode) so visual-design audits don't try to use it.
+
+### Frontmatter and library cleanup
+
+- **Dropped `metadata.version` from sub-skills.** They never moved in lockstep with absorptions, so they were doing no work. The canonical version is now `package.json`. Documented in parent `Meta` section.
+- **Dropped the free-form `license:` frontmatter line** from the parent — `LICENSE` and `NOTICE.md` already cover this.
+- **Aligned descriptions** on `[topics]. Use when [trigger].` voice across all five SKILL.md files.
+- **Added H1 to each sub-skill** so file structure is consistent (was missing on all four sub-skills).
+- **Marked empty libraries placeholder.** `palettes.json` and `font-pairings.json` are now flagged as placeholder in the parent's Shared Libraries table. `easing-curves.json` gained a `consumed_by` cross-reference so it's clear it's the canonical source for `motion.md`'s easing table.
+
+### Cross-references added
+
+- Each visual sub-skill now lists `anti-patterns.md` in its References, with a note to run it last — solo sub-skill runs previously skipped the anti-pattern sweep entirely (only full audits picked it up via the parent's conditional reads).
+- Each sub-skill explicitly mentions the **Walkthrough offer** and **Verify pass** in its Output section, pointing at the parent for the canonical wording.
+- Engineer external URLs (Anthropic Code Review, Vercel skills) removed from the SKILL.md References list — they were already credited in `NOTICE.md`, where attribution belongs.
+- `humanizer` dependency now noted in `NOTICE.md` under "Optional external dependencies."
+
+### Meta — version policy
+
+Added a `Meta → Where new content lands` note: sub-skill SKILL.md bodies stay short, depth lives in `references/`. New absorptions go into the matching reference file, not the sub-skill body. The engineer rebuild is the first place this convention is fully applied.
+
+---
+
 ## 0.1.23 — 2026-05-09 — Absorb react-doctor into engineer skill
 
 ### Added — 6 patterns absorbed from millionco/react-doctor

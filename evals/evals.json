@@ -122,6 +122,42 @@
         "must_suggest": ["specific action", "verb", "consequence"],
         "must_not": ["clear", "good", "fine"]
       }
+    },
+    {
+      "id": "engineer-001",
+      "mode": "cami-design-engineer",
+      "description": "Flags boolean prop sprawl on a component",
+      "tags": ["engineer", "composition"],
+      "input": "Review this component usage:\n\n```tsx\n<Tabs isVertical isLazy isFitted hasDivider isSticky>\n  <Tab label=\"Overview\" />\n  <Tab label=\"Details\" />\n</Tabs>\n```",
+      "expect": {
+        "must_mention": ["boolean", "prop", "sprawl"],
+        "must_suggest": ["variant", "compound", "Tabs.List", "Tabs.Trigger"],
+        "must_not": ["looks good", "no issues", "clean"]
+      }
+    },
+    {
+      "id": "engineer-002",
+      "mode": "cami-design-engineer",
+      "description": "Flags array index used as React key",
+      "tags": ["engineer", "perf", "react"],
+      "input": "Review this list rendering:\n\n```tsx\n{items.map((item, i) => (\n  <Row key={i} data={item} onDelete={() => remove(item.id)} />\n))}\n```",
+      "expect": {
+        "must_mention": ["index", "key", "stable"],
+        "must_suggest": ["item.id", "stable id"],
+        "must_not": ["looks good", "fine", "correct"]
+      }
+    },
+    {
+      "id": "engineer-003",
+      "mode": "cami-design-engineer",
+      "description": "Flags div onClick instead of button",
+      "tags": ["engineer", "a11y"],
+      "input": "Review this interactive element:\n\n```tsx\n<div onClick={handleClose} className=\"close-icon\">\n  <XIcon />\n</div>\n```",
+      "expect": {
+        "must_mention": ["button", "focusable", "keyboard"],
+        "must_suggest": ["<button", "aria-label"],
+        "must_not": ["looks good", "fine", "accessible"]
+      }
     }
   ]
 }

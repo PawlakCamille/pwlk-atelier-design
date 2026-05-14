@@ -3,13 +3,13 @@ name: cami-design-interaction
 description: Hover, press, animations, motion. Use when interactions feel sluggish, flat, robotic, or lifeless.
 user-invocable: true
 argument-hint: "[target]"
-metadata:
-  version: 0.1.0
 ---
 
-## MANDATORY PREPARATION
+# Cami — Interaction
 
-Invoke `cami-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding.
+## Required reading
+
+Before proceeding, load `../cami-design/SKILL.md` and apply its **Context Gathering Protocol**, **Design System Protocol**, **Severity scale**, and **Review Output Format**. Then load `../cami-design/references/motion.md` — the **Animation Decision Framework** lives there and is the canonical source for the rules below.
 
 ---
 
@@ -28,45 +28,9 @@ Tune the parts of an interface that respond to the user: hover, focus, press, en
 
 1. Check `package.json` for motion libraries (`motion`, `framer-motion`, React Spring, etc.).
 2. Identify existing easing and duration conventions in the codebase.
-3. Read `../cami-design/references/motion.md` and `../cami-design/references/interaction.md`.
+3. Read `../cami-design/references/motion.md` (Animation Decision Framework, performance, scroll-linked motion) and `../cami-design/references/interaction.md` (press, hover, focus, tooltips, mobile/touch).
 
-## The Animation Decision Framework
-
-Before writing any animation, answer in order:
-
-### 1. Should this animate at all?
-
-| Frequency | Decision |
-| --- | --- |
-| 100+ times/day (keyboard shortcuts, command palette) | **No animation.** Ever. |
-| Tens of times/day (hover, list nav) | Remove or drastically reduce |
-| Occasional (modals, drawers, toasts) | Standard animation |
-| Rare (onboarding, celebrations, first-run) | Can add delight |
-
-**Never animate keyboard-initiated actions.** They are repeated so often that animation feels like latency.
-
-### 2. What is the purpose?
-
-Every animation needs a clear answer to "why does this animate?" Valid purposes:
-- **Spatial consistency** (toast enters/exits from the same direction)
-- **State indication** (morphing button shows a state change)
-- **Feedback** (scale on press confirms the tap)
-- **Preventing jarring changes** (elements appearing without transition feel broken)
-
-If the purpose is "it looks cool" and the user sees it often, don't animate.
-
-### 3. What easing?
-
-| Scenario | Easing | Value |
-| --- | --- | --- |
-| Entering the screen | ease-out — smooth, refined | `cubic-bezier(0.25, 1, 0.5, 1)` |
-| Entering the screen | ease-out — snappier | `cubic-bezier(0.22, 1, 0.36, 1)` |
-| Entering the screen | ease-out — confident, decisive | `cubic-bezier(0.16, 1, 0.3, 1)` |
-| Exiting | ease-in — accelerates out | `cubic-bezier(0.4, 0, 1, 1)` |
-| On-screen movement/morph | soft ease-out | `cubic-bezier(0.2, 0, 0, 1)` |
-| Spring (if motion lib available) | spring — bounce always 0 | `{ type: "spring", duration: 0.3, bounce: 0 }` |
-
-**Never use bounce or elastic easing** (`cubic-bezier(0.34, 1.56, ...)` etc.) — they feel dated and draw attention to the animation itself rather than the content.
+The Animation Decision Framework — "should this animate? what's the purpose? what easing?" — is documented once, in `references/motion.md`. Apply it as a gate before flagging any motion-related finding.
 
 ## Review Dimensions
 
@@ -96,24 +60,18 @@ If the purpose is "it looks cool" and the user sees it often, don't animate.
 
 ## Accessibility
 
-Always provide a reduced-motion fallback — ignoring this is an accessibility violation, not a suggestion.
-
-```css
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-```
+Reduced-motion fallback is mandatory — see `../cami-design/references/accessibility.md` → *Motion* for the canonical snippet and the rationale (vestibular disorders, what to keep vs. remove). Apply at the root, not per-component.
 
 ## Output
 
 Findings as tables with columns `# | Severity | Before | After | Why`, grouped by dimension. Severity is 🔴 (Important) or 🟡 (Nit) — see the parent skill's `Review Output Format → Severity scale` for calibration. Skip dimensions with no issues.
 
+Close with the walkthrough offer and (after fixes) the Verify pass — see parent skill `Review Output Format → Closing / Walkthrough mode / Verify pass`.
+
 ## References
 
-- `../cami-design/references/motion.md`
-- `../cami-design/references/interaction.md`
-- `../cami-design/libraries/easing-curves.json`
+- `../cami-design/references/motion.md` — Animation Decision Framework, performance, scroll-linked motion, advanced techniques
+- `../cami-design/references/interaction.md` — press feedback, hover, focus, tooltips, drag & drop, mobile/touch
+- `../cami-design/references/accessibility.md` — reduced-motion fallback, vestibular safety
+- `../cami-design/references/anti-patterns.md` — sweep last for motion-related "AI slop" tells (bounce easing, glow effects, gratuitous reveals)
+- `../cami-design/libraries/easing-curves.json` — canonical easing values consumed by `motion.md`
