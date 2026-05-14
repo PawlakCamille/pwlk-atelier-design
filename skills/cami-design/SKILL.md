@@ -1,16 +1,24 @@
 ---
 name: cami-design
-description: Looks at your UI before shipping, spots what's off, brings in layout, interaction, copy, or engineer.
+description: UI audit before ship. Spots what's off, routes to layout, interaction, copy, or engineer. Use when reviewing a screen, a flow, or polishing a near-done project.
 user-invocable: true
 argument-hint: "[cami-design-layout|cami-design-interaction|cami-design-copy|cami-design-engineer]"
-license: Apache 2.0. Inspired by anthropics/frontend-design, pbakaus/impeccable, emilkowalski/skill, and jakubkrehel/make-interfaces-feel-better. See NOTICE.md for attribution.
-metadata:
-  version: 0.1.22
 ---
 
 # Cami — Design Skill
 
 A personal, curated collection of design engineering knowledge. The parent skill holds shared principles and references; sub-skills (cami-design-layout, cami-design-interaction, cami-design-copy, cami-design-engineer) handle specific concerns — three for visual design judgement, one for code-side handoff polish.
+
+License: Apache 2.0 — see `LICENSE`. Attribution: see `NOTICE.md`.
+
+## Roles
+
+This file plays two roles. Treat them as separate so they don't recurse into each other.
+
+- **Read mode** (always). Every sub-skill loads this file to inherit the **Context Gathering Protocol**, **Design System Protocol**, **Severity scale**, **Review Output Format**, and **Walkthrough / Verify** rules. Loading does not trigger an audit — it's just shared rules.
+- **Run mode** (only when invoked bare as `/cami-design`). The skill runs a full audit per the **Full Audit Contract** below.
+
+When a sub-skill says "load `../cami-design/SKILL.md`," that's read mode — read the rules, then continue with the sub-skill. Do not start a new full audit.
 
 ## Design System Protocol
 
@@ -47,7 +55,7 @@ Design skills produce generic output without project context. Before doing any d
 
 ## Modes (Sub-Skills)
 
-Each mode is invokable on its own. Use this table to decide which to load.
+Three visual modes + one code-handoff mode, scheduled differently. Each is invokable on its own.
 
 | Mode | When to use | Read |
 | --- | --- | --- |
@@ -131,27 +139,41 @@ This keeps design and engineer work as two distinct moments of the same audit. S
 
 Loaded on demand — do not read proactively. Consult when a mode instructs you to, or when the current task requires depth on that topic.
 
+### Visual-design references (layout, interaction, copy)
+
 | Topic | File | When to read |
 | --- | --- | --- |
 | Typography | `references/typography.md` | Font choice, hierarchy, sizing, OpenType features, typographic characters |
 | Color | `references/color.md` | Color systems, contrast, dark mode, native browser UI |
 | Spacing & layout | `references/spacing-layout.md` | Grids, rhythm, concentric radius, safe areas, content resilience |
-| Motion | `references/motion.md` | Easing, duration, staggering, interruptibility |
-| Interaction | `references/interaction.md` | Hit areas, feedback, press states, hover, mobile/touch |
-| Forms | `references/forms.md` | Input attributes, submit behavior, error placement, placeholders — load when the review target contains form controls |
-| Accessibility | `references/accessibility.md` | Contrast, focus, keyboard, screen readers |
-| Anti-patterns | `references/anti-patterns.md` | "AI slop" tells, generic aesthetics to avoid |
+| Motion | `references/motion.md` | Animation Decision Framework, easing, duration, scroll-linked, performance |
+| Interaction | `references/interaction.md` | Press, hover, focus, tooltips, drag, mobile/touch |
+| Forms | `references/forms.md` | Input attributes, labels, submit behavior, errors, placeholders, confirmations — load when reviewing form controls or form copy |
+| Copy patterns | `references/copy-patterns.md` | Before/after tables (errors, empty states, CTAs), 6 Principles, NEVER list — load for any copy work |
+| Accessibility | `references/accessibility.md` | Contrast, focus, keyboard, screen readers — canonical home for hit areas, reduced-motion fallback, contrast thresholds |
+| Anti-patterns | `references/anti-patterns.md` | "AI slop" tells in visuals and copy, generic aesthetics to avoid |
 | Craft | `references/craft.md` | Taste philosophy, why details compound |
+
+### Engineer-mode references (code handoff)
+
+| Topic | File | When to read |
+| --- | --- | --- |
+| Component Composition | `references/composition.md` | Component shape, prop surface, state location, compound patterns |
+| Design System Fidelity (code) | `references/ds-fidelity.md` | Code-level DS violations — pairs with Design System Protocol above |
+| State & Data Flow | `references/state.md` | Effects, async cleanup, race conditions, fetching, prop mutation |
+| A11y Implementation | `references/a11y-implementation.md` | Code-level a11y findings — pairs with `accessibility.md` principles |
+| Performance & Rendering | `references/perf.md` | Keys, memoization, animation cost, hot handlers, list lookups |
+| Type Safety & Code Clarity | `references/typing.md` | TS discipline, file naming, magic numbers, comments |
 
 ## Shared Libraries
 
-Structured data — consult when you need concrete values.
+Structured data — consult when you need concrete values. Markdown references are the teaching layer; libraries are the data layer for the same content.
 
-| Library | File |
-| --- | --- |
-| Color palettes | `libraries/palettes.json` |
-| Font pairings | `libraries/font-pairings.json` |
-| Easing curves | `libraries/easing-curves.json` |
+| Library | File | Status |
+| --- | --- | --- |
+| Easing curves | `libraries/easing-curves.json` | Active — canonical values for `references/motion.md` |
+| Color palettes | `libraries/palettes.json` | Placeholder — populated as palettes get validated in real work |
+| Font pairings | `libraries/font-pairings.json` | Placeholder — populated as pairings get validated in real work |
 
 ---
 
@@ -178,8 +200,10 @@ Every finding carries a severity emoji so the user can scan the list at a glance
 | Symbol | Label | Meaning |
 | --- | --- | --- |
 | 🔴 | **Important** | Broken behavior, clear DS violation, accessibility blocker, or a craft miss the user *will* notice. Block-equivalent. |
-| 🟡 | **Nit** | Worth fixing for craft and consistency, not blocking. Cap at ~5 per section; mention `+N similar` if more. |
-| 🟣 | **Pre-existing** | Issue exists in the codebase but wasn't introduced by the current changes. Surface, don't block. *(Engineer mode only — visual-design audits don't have a diff scope, so they use 🔴 / 🟡 only.)* |
+| 🟡 | **Nit** | Worth fixing for craft and consistency, not blocking. Cap at 5 per section; mention `+N similar` if more. |
+| 🟣 | **Pre-existing** | Diff-scoped reviews only (currently `cami-design-engineer`): the issue exists in the codebase but wasn't introduced by the current changes. Surface, don't block. Example: a `useMemo` wrapping `items.length` in a file the current diff touches but didn't create. Visual-design modes don't have a diff scope and use 🔴 / 🟡 only. |
+
+**Cap unit is "section."** A section is one of the lettered output groups (A, B, C…) in the review. It is *not* the same as a review *dimension* (Composition, State, Perf…). Cap at 5 nits per output section regardless of how many dimensions feed into it.
 
 How to calibrate: weigh **Frequency** (how often is this surface or path hit?), **Impact** (how hard to recover when it bites?), and **Persistence** (one-off vs. recurring). High on all three → 🔴. Low on all three → 🟡. Mixed → judgement, lean 🟡 unless it blocks intent.
 
@@ -250,5 +274,6 @@ If an item requires a code snippet, include it inside the After cell. Never brea
 
 ## Meta
 
-- **Version**: see frontmatter. Bump on any absorption or substantive change. Log in `CHANGELOG.md`.
+- **Version**: the canonical version is `package.json`. Sub-skill `metadata.version` fields are intentionally absent — they never moved in lockstep with absorptions, so they were doing no work. Bump `package.json` on any absorption or substantive change. Log in `CHANGELOG.md`.
 - **Evolution**: this skill grows by absorbing techniques from upstream skills. Never copy blindly — run the eval corpus first, then cherry-pick into the relevant reference file, then log in CHANGELOG with attribution.
+- **Where new content lands.** Sub-skill SKILL.md files stay short — they index, route, and define output. Depth lives in `references/`. New patterns absorbed from upstream go into the matching reference file, not the sub-skill body.

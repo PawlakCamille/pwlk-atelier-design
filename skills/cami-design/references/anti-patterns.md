@@ -118,10 +118,22 @@ Mixing icon libraries with different stroke widths (1.5px vs 2px) in the same UI
 
 Sidebars, modal bodies, command menus, and dropdowns rendering with the OS default scrollbar (chunky, untoken'd, often a different gray than the rest of the UI). It signals "design stopped at the container edge." Two CSS rules tie scrollbars into the design system. See `spacing-layout.md` → *Tame Native Scrollbars*.
 
+## Copy AI Tells
+
+The same sweep applied to words. Run it last on the copy pass, same way you run the visual sweep last on the design pass.
+
+- **Generic loading messages**: "Herding pixels…", "Teaching robots to dance…", "Counting backwards from infinity…", "Consulting the magic 8-ball…" — write what the product actually does.
+- **Trailing "successfully"** on status messages: "Saved successfully." → "Saved." It adds nothing, reads as machine-padded prose.
+- **Exclamation marks on routine status**: "Settings saved!" → "Settings saved." Reserve `!` for genuine milestones (first project shipped, account upgraded), not every save.
+- **Sycophantic confirmations**: "Great choice!", "Awesome!", "Perfect!" before doing the thing — AI tells. Just do the thing.
+- **Sparkle emoji prefixes on every CTA**: "✨ Generate", "✨ Create with AI", "✨ Try it" — instantly recognisable as machine-styled. Use sparingly, if at all.
+- **"Oops, something went wrong"** as a default error — vague, blames nobody, helps nobody. State what happened and what to do (see `cami-design-copy/SKILL.md` → Patterns / Error messages).
+- **"AI Generated" / "Made with AI" badges in product UI** — if the product needs to label its own output as AI, the output isn't ready to ship as-is.
+
 ## The Test
 
-If someone said "AI made this," would you believe them immediately? If yes, change it.
+If someone said "AI made this," would you believe them immediately? If yes, change it. Applies to both visuals and copy.
 
 ## Attribution
 
-Synthesized from: pbakaus/impeccable (impeccable skill "DON'T" guidelines).
+Synthesized from: pbakaus/impeccable (impeccable skill "DON'T" guidelines). Copy AI tells consolidated from `cami-design-copy/SKILL.md`.

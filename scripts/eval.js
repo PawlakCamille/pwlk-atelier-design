@@ -22,7 +22,12 @@ if (!API_KEY) {
 
 // --- CLI args ---
 const args = process.argv.slice(2);
-const filterMode = argValue(args, "--mode");
+const rawMode = argValue(args, "--mode");
+const filterMode = rawMode
+  ? rawMode.startsWith("cami-design-")
+    ? rawMode
+    : `cami-design-${rawMode}`
+  : null;
 const filterId = argValue(args, "--id");
 const verbose = args.includes("--verbose");
 

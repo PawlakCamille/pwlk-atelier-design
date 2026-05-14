@@ -54,18 +54,25 @@ The skill reads it automatically on each invocation.
 
 ```
 skills/
-├── cami-design/              # parent: principles, references, context protocol
+├── cami-design/              # parent: shared rules (Roles: read vs run mode)
 │   ├── SKILL.md
 │   ├── references/           # deep material loaded on demand
-│   └── libraries/            # easing curves, palettes, font pairings
-├── cami-design-layout/
-├── cami-design-interaction/
-├── cami-design-copy/
-└── cami-design-engineer/     # code-side handoff pass
+│   │   ├── typography.md  color.md  spacing-layout.md
+│   │   ├── motion.md  interaction.md  forms.md
+│   │   ├── accessibility.md  anti-patterns.md  craft.md
+│   │   └── composition.md  state.md  perf.md
+│   │       typing.md  a11y-implementation.md  ds-fidelity.md
+│   └── libraries/            # easing-curves.json (active); palettes/font-pairings (placeholder)
+├── cami-design-layout/       # visual: alignment, sizing, hierarchy
+├── cami-design-interaction/  # visual: hover, press, motion
+├── cami-design-copy/         # visual: labels, errors, tone
+└── cami-design-engineer/     # code-side handoff pass (router into references/)
 evals/                        # test corpus for iterative improvement
 CHANGELOG.md                  # what was absorbed, from where, when
-NOTICE.md                     # attribution to upstream skills
+NOTICE.md                     # attribution to upstream skills + optional external deps
 ```
+
+Sub-skill SKILL.md files stay short — they index, route, and define output. Depth lives in `references/`. New absorptions go into the matching reference file, not the sub-skill body.
 
 ## Evolution
 
@@ -75,14 +82,14 @@ This skill grows by absorbing techniques from upstream sources. The process:
 2. Run `npm run eval` — baseline the current score.
 3. Cherry-pick the specific material into the right reference file.
 4. Run evals again — confirm improvement.
-5. Log in `CHANGELOG.md` with attribution, bump version in `SKILL.md`.
-6. `npm version patch && npm publish --access public && git push`
+5. Log in `CHANGELOG.md` with attribution.
+6. `npm version <patch|minor> && npm publish --access public && git push` — `patch` for absorption-only bumps, `minor` for substantive restructuring (e.g. the v0.2.0 audit cleanup). The canonical version lives in `package.json`; sub-skill SKILL.md files no longer carry their own `metadata.version`.
 
 ## Evals
 
 ```bash
 ANTHROPIC_API_KEY=sk-... npm run eval          # all cases
-npm run eval:layout                             # by mode
+npm run eval:layout                             # by mode (layout / interaction / copy / engineer)
 npm run eval -- --id interaction-002 --verbose  # single case, full output
 ```
 

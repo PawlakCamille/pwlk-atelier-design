@@ -3,17 +3,19 @@ name: cami-design-copy
 description: Labels, errors, empty states, tone. Use when text reads awkwardly or leaves users guessing what to do.
 user-invocable: true
 argument-hint: "[target]"
-metadata:
-  version: 0.1.0
 ---
 
-## MANDATORY PREPARATION
+# Cami — Copy
 
-Invoke `cami-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding. For this mode you also need:
+## Required reading
+
+Before proceeding, load `../cami-design/SKILL.md` and apply its **Context Gathering Protocol**, **Design System Protocol**, **Severity scale**, and **Review Output Format**. For copy work you also need:
 
 - **Voice / tone**: how does the product speak? (formal, friendly, sharp, playful, neutral)
 - **Audience literacy**: technical users? consumers? mixed?
 - **User's mental state in context**: stressed during errors? confident during success? anxious during payment? Copy should match the emotional register of the moment.
+
+If the audited surface includes form controls, also load `../cami-design/references/forms.md` — labels, placeholders, error placement, confirmations, and unsaved-changes warnings are all canonicalised there.
 
 ---
 
@@ -56,91 +58,45 @@ Improve the words users read. Clearer labels, kinder errors, useful empty states
 - Adjust intensity by context: transactional moments stay neutral, celebratory moments can be warmer
 
 ### Forms & Confirmations
-- Instructions go **before** the field, not after
-- Show format in an example, not as the sole placeholder (placeholders disappear when the user types)
-- Confirmation dialogs: state the specific action + consequence ("Delete 'Project Alpha'? This can't be undone.") — never "Are you sure?"
-- Destructive button labels match the action ("Delete project" not "Yes" or "OK")
+
+Form-related copy patterns — instructions before the field, placeholders as examples not labels, confirmation dialog wording, destructive button labels, unsaved-changes warnings — live in `../cami-design/references/forms.md` (Labels, Placeholders, Unsaved Changes sections). Load that reference when reviewing form copy. The patterns there are the canonical source; this sub-skill applies them.
 
 ### Loading & Success States
 - Loading copy should set expectations: what's happening + how long ("Analyzing your data… usually 30–60 seconds")
 - Never leave "Loading..." for long operations — give context
 - Success messages confirm what happened + what comes next ("Settings saved. Changes take effect immediately.")
 - Match emotional register: celebrate big wins, stay neutral for routine saves
-- **Strip "successfully"** — it adds nothing. "Saved." not "Saved successfully." "Voice updated." not "Voice updated successfully."
+- Trailing "successfully" and routine-status exclamations are anti-patterns — see `../cami-design/references/anti-patterns.md` → *Copy AI Tells*.
 
-### ⚠️ AI Slop Loading Copy
-Never write generic loading messages like:
-- "Herding pixels…"
-- "Teaching robots to dance…"
-- "Counting backwards from infinity…"
-- "Consulting the magic 8-ball…"
+### ⚠️ AI Slop in Copy
 
-These are instantly recognizable as machine-generated. Write messages specific to what your product **actually does**.
+The copy-side "AI tells" sweep — generic loading messages ("Herding pixels…", "Teaching robots to dance…"), trailing "successfully", sparkle emoji on every CTA, sycophantic confirmations ("Great choice!") — is canonicalised in `../cami-design/references/anti-patterns.md` → *Copy AI tells*. Run it last, same as the visual anti-pattern sweep.
 
 ### Microcopy Hygiene
 - Sentence case in UI (not Title Case) unless the brand specifies otherwise
 - Oxford comma: follow house style; be consistent
 - No trailing punctuation on buttons or labels
-- No exclamation marks in success or status messages — "Saved." not "Saved!" Reserve `!` for genuine milestones
 - Numerals for UI (use `1, 2, 3` not `one, two, three` for quantities)
+- For trailing "successfully", routine-status exclamation marks, sparkle CTAs, and other AI tells in copy: see `../cami-design/references/anti-patterns.md` → *Copy AI Tells*.
 
-## Patterns
+## Patterns, Principles, and NEVER
 
-### Error messages
-| Avoid | Prefer |
-| --- | --- |
-| "Something went wrong." | "We couldn't save your changes. Try again, or refresh the page." |
-| "Invalid input." | "Email needs an `@` and a domain." |
-| "Error 500." | "Our server had a hiccup. We've been notified — try again in a moment." |
-| "Failed to save." | "Couldn't save — try again in a moment." |
-| "Failed to remove user." | "Couldn't remove this member — try again in a moment." |
-
-**Pattern:** "Failed to…" → "Couldn't…" + next step. Shorter, warmer, always followed by what to do.
-
-### Empty states
-| Avoid | Prefer |
-| --- | --- |
-| "No results." | "Nothing matches *"[query]"*. Try broader terms or clear filters." |
-| "No items yet." | "Start by adding your first [item]. [+ button]" |
-
-### CTAs
-| Avoid | Prefer |
-| --- | --- |
-| "Submit" | "Send message" / "Create account" / "Pay $49" |
-| "Cancel" + "OK" on destructive modal | "Keep [item]" + "Delete permanently" |
-
-## The 6 Principles
-
-Every piece of copy should pass this checklist:
-
-1. **Specific** — "Enter email" not "Enter value"
-2. **Concise** — cut every word that doesn't add meaning (but never sacrifice clarity for brevity)
-3. **Active** — "Save changes" not "Changes will be saved"
-4. **Human** — "Oops, something went wrong" not "System error encountered"
-5. **Helpful** — tell users what to do, not just what happened
-6. **Consistent** — pick one term per concept and never vary it (don't alternate between "workspace" and "project" for variety)
-
-## NEVER
-- Use jargon without explanation
-- Blame the user ("You made an error" → "This field is required")
-- Be vague ("Something went wrong" without explanation or next step)
-- Use passive voice when active is possible
-- Use placeholder text as the only label — it disappears when the user types
-- Vary terminology across the product for stylistic variety — consistency beats cleverness
-- Write AI-slop loading messages (see ⚠️ section above)
-- Use humor during errors — be empathetic instead
-- Assume technical knowledge
+Concrete before/after tables (error messages, empty states, CTAs), the 6 Principles checklist, and the NEVER list all live in `../cami-design/references/copy-patterns.md`. Load that reference when applying patterns during a review — it's the canonical source.
 
 ## Output
 
 Findings as tables with columns `# | Severity | Before | After | Why`, grouped by dimension. Severity is 🔴 (Important) or 🟡 (Nit) — see the parent skill's `Review Output Format → Severity scale` for calibration. Cite the specific file and component when possible.
 
+Close with the walkthrough offer and (after fixes) the Verify pass — see parent skill `Review Output Format → Closing / Walkthrough mode / Verify pass`.
+
 ## References
 
-- `../cami-design/references/craft.md` (for tone and intent)
-- `../cami-design/references/forms.md` (when copy touches form labels, placeholders, errors, unsaved-changes warnings)
-- `../cami-design/references/typography.md` (typographic characters: ellipsis, curly quotes, non-breaking spaces)
+- `../cami-design/references/copy-patterns.md` — canonical before/after patterns, the 6 Principles, NEVER list
+- `../cami-design/references/forms.md` — form labels, placeholders, errors, confirmations, unsaved-changes (canonical for form copy)
+- `../cami-design/references/anti-patterns.md` — canonical home for Copy AI Tells; sweep last
+- `../cami-design/references/craft.md` — tone, intent, perceived performance
+- `../cami-design/references/typography.md` — typographic characters: ellipsis, curly quotes, non-breaking spaces
 
 ## Human-facing writing note
 
-When producing copy meant for users, run the output through the `humanizer` skill if available — it strips AI-tell patterns that read as synthetic.
+When producing copy meant for users, run the output through the `humanizer` skill if available — it strips AI-tell patterns that read as synthetic. `humanizer` is an external skill (not bundled with `cami-design`); see `NOTICE.md` for sourcing. Skip silently if it's not installed.

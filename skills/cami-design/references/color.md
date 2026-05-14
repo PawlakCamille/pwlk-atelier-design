@@ -4,7 +4,7 @@ Deep reference for color decisions. Loaded on demand.
 
 ## Design System First
 
-Before touching any color value, check for existing tokens, CSS variables, or theme config. Propose changes using the existing system — never override.
+The principle "check tokens / variables / theme config before suggesting any value" is canonicalised in the parent SKILL.md → **Design System Protocol**. Apply it before touching any color.
 
 ## Color Space: Use OKLCH
 
@@ -27,14 +27,10 @@ Don't reach for blue (hue ~250) or warm orange (hue ~60) by reflex — those are
 
 ## Contrast
 
-- Body text: ≥ 4.5:1 against background (WCAG AA).
-- Large text (≥ 18.66px or 14px bold): ≥ 3:1.
-- Interactive elements: ≥ 3:1 for the element boundary.
-- Focus rings: must meet 3:1 against adjacent colors.
-- **Placeholder text still needs 4.5:1.** That light gray placeholder everywhere? Usually fails WCAG.
-- **Gray text on colored backgrounds** looks washed out and dead. Use a darker shade of the background color, or transparency — never a generic gray.
+Canonical thresholds (body 4.5:1, large 3:1, interactive boundaries 3:1, focus rings 3:1, placeholders 4.5:1) live in `accessibility.md` → *Contrast (WCAG) — canonical*. Color-specific guidance:
 
-Test with actual tooling (Stark, Contrast app, browser devtools). Don't eyeball.
+- **Gray text on colored backgrounds** looks washed out and dead. Use a darker shade of the background color, or transparency — never a generic gray.
+- Test with actual tooling (Stark, Contrast app, browser devtools). Don't eyeball.
 
 ## Dark Mode
 

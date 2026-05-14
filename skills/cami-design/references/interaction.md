@@ -38,17 +38,7 @@ Deep reference for interactive states and feedback. Loaded on demand.
 
 ## Hit Areas
 
-- Minimum 40×40px regardless of visible size.
-- Extend via pseudo-element:
-  ```css
-  position: relative;
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -8px; /* expands hit area */
-  }
-  ```
-- Never overlap hit areas of adjacent interactive elements.
+See `accessibility.md` → *Touch* for the canonical 40×40 rule and pseudo-element technique. The same content used to live here too; collapsed to a pointer to avoid drift.
 
 ## Loading States
 
@@ -148,7 +138,7 @@ This makes toolbars and nav feel significantly faster without removing the prote
 
 ## Forms
 
-See `../cami-design/references/forms.md` for input attributes, submit behavior, error placement, placeholders, and unsaved-changes warnings.
+See `forms.md` for input attributes, submit behavior, error placement, placeholders, and unsaved-changes warnings.
 
 ## Attribution
 

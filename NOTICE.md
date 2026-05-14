@@ -160,6 +160,12 @@ Deliberately **not** absorbed: URL-as-state, deep-linking, hydration rules, i18n
 Repository: https://github.com/vercel-labs/web-interface-guidelines
 License: MIT
 
+## Optional external dependencies
+
+These are skills `cami-design` *can* defer to when they're installed. They are not bundled and not required — sub-skills must skip silently if the dependency is missing.
+
+- **`humanizer` skill** — referenced from `cami-design-copy/SKILL.md`. Strips AI-tell patterns from user-facing copy (synthetic phrasing, sycophancy, padding). Not bundled here. If you maintain a `humanizer` skill you'd like cami-design to integrate with, open an issue; otherwise the soft reference is a no-op when the skill isn't installed.
+
 ## License
 
 This skill is released under Apache 2.0. When absorbing from upstream skills with compatible licenses, attribution is maintained here and in the specific reference file where the material lives.

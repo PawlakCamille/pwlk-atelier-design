@@ -7,7 +7,7 @@ Deep reference for composition. Loaded on demand.
 - [The Spacing Scale](#the-spacing-scale)
 - [Concentric Border Radius](#concentric-border-radius)
 - [Optical vs Geometric Alignment](#optical-vs-geometric-alignment)
-- [Hit Areas](#hit-areas)
+- [Hit Areas (→ accessibility.md → Touch)](#hit-areas)
 - [Shadows Over Borders](#shadows-over-borders)
 - [Image Outlines](#image-outlines)
 - [Scrollbar Gutter](#scrollbar-gutter)
@@ -56,9 +56,7 @@ When in doubt, trust your eye over the math.
 
 ## Hit Areas
 
-- Minimum 40×40px, regardless of visible element size.
-- Extend via pseudo-element if the visible element is smaller.
-- Never let hit areas of adjacent interactive elements overlap.
+See `accessibility.md` → *Touch* for the canonical 40×40 rule, spacing, and pseudo-element technique. The same content used to live here too; collapsed to a pointer to avoid drift.
 
 ## Shadows Over Borders
 

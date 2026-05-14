@@ -3,13 +3,13 @@ name: cami-design-layout
 description: Spacing, alignment, hierarchy, rhythm. Use when something looks crowded, unbalanced, or just doesn't sit right.
 user-invocable: true
 argument-hint: "[target]"
-metadata:
-  version: 0.1.0
 ---
 
-## MANDATORY PREPARATION
+# Cami — Layout
 
-Invoke `cami-design` — it contains the shared principles, references, and **Context Gathering Protocol**. Follow the protocol before proceeding.
+## Required reading
+
+Before proceeding, load `../cami-design/SKILL.md` and apply its **Context Gathering Protocol**, **Design System Protocol**, **Severity scale**, and **Review Output Format**. Loading is not a recursive `/cami-design` invocation — just read the shared rules, then continue here.
 
 ---
 
@@ -75,8 +75,11 @@ Work through these systematically. For each, use the `Before | After | Why` tabl
 
 Present findings grouped by dimension, each as a table with columns `# | Severity | Before | After | Why`. Severity is 🔴 (Important) or 🟡 (Nit) — see the parent skill's `Review Output Format → Severity scale` for calibration. Omit dimensions that had no issues.
 
+Close with the walkthrough offer and (after fixes) the Verify pass — see parent skill `Review Output Format → Closing / Walkthrough mode / Verify pass`.
+
 ## References
 
-- `../cami-design/references/spacing-layout.md`
-- `../cami-design/references/typography.md` (for vertical rhythm, line-height)
-- `../cami-design/references/accessibility.md` (for hit areas, contrast)
+- `../cami-design/references/spacing-layout.md` — grids, rhythm, concentric radius, shadows vs borders, safe areas, content resilience
+- `../cami-design/references/typography.md` — vertical rhythm, line-height, hierarchy through weight
+- `../cami-design/references/accessibility.md` — hit areas, contrast, focus order
+- `../cami-design/references/anti-patterns.md` — sweep last for "AI slop" tells (identical card grids, mixed icon weights, `h-screen` traps, side-stripe borders)

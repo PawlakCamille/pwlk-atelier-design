@@ -8,12 +8,14 @@ Before writing any animation, answer in order:
 
 ### 1. Should this animate at all?
 
-| Frequency | Decision |
-| --- | --- |
-| 100+ times/day | No animation. |
-| Tens of times/day | Remove or drastically reduce. |
-| Occasional | Standard animation. |
-| Rare / first-time | Can add delight. |
+| Frequency | Examples | Decision |
+| --- | --- | --- |
+| 100+ times/day | Keyboard shortcuts, command palette | **No animation.** Ever. |
+| Tens of times/day | Hover, list nav | Remove or drastically reduce. |
+| Occasional | Modals, drawers, toasts | Standard animation. |
+| Rare / first-time | Onboarding, celebrations, first-run | Can add delight. |
+
+**Never animate keyboard-initiated actions.** They are repeated so often that animation feels like latency.
 
 **Raycast has no open/close animation.** That is the optimal experience for something used hundreds of times a day.
 
@@ -225,7 +227,7 @@ Without this, scale and rotate animations on SVG shapes fly off-center in Safari
 
 ## Accessibility
 
-Respecting `prefers-reduced-motion` is an accessibility requirement, not optional. Always provide a non-animated fallback. The snippet lives in `interaction/SKILL.md` — apply it globally at the root level.
+Reduced-motion fallback: see `accessibility.md` → *Motion* for the canonical snippet, the rationale (vestibular safety, what to keep vs. remove), and the application rule.
 
 ## Attribution
 
