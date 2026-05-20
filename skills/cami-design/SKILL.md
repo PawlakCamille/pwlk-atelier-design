@@ -95,6 +95,7 @@ Load these references when the audit target contains the matching element. Do no
 | `references/color.md` | Non-trivial color decisions or contrast questions |
 | `references/typography.md` | Dense text, data tables, or typographic hierarchy work |
 | `references/spacing-layout.md` | Any layout review (always true in practice) |
+| `references/scroll-containers.md` | Sidebars, modals, dropdowns, command menus, code blocks, chat transcripts, carousels — any inset scrollable region |
 | `references/anti-patterns.md` | Always. Run this sweep last. |
 
 ### 3. Surface coverage
@@ -146,6 +147,7 @@ Loaded on demand — do not read proactively. Consult when a mode instructs you 
 | Typography | `references/typography.md` | Font choice, hierarchy, sizing, OpenType features, typographic characters |
 | Color | `references/color.md` | Color systems, contrast, dark mode, native browser UI |
 | Spacing & layout | `references/spacing-layout.md` | Grids, rhythm, concentric radius, safe areas, content resilience |
+| Scroll containers | `references/scroll-containers.md` | Scrollbar gutter, tamed native scrollbars, scroll edge mask — inset scrollable regions |
 | Motion | `references/motion.md` | Animation Decision Framework, easing, duration, scroll-linked, performance |
 | Interaction | `references/interaction.md` | Press, hover, focus, tooltips, drag, mobile/touch |
 | Forms | `references/forms.md` | Input attributes, labels, submit behavior, errors, placeholders, confirmations — load when reviewing form controls or form copy |

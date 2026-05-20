@@ -10,8 +10,7 @@ Deep reference for composition. Loaded on demand.
 - [Hit Areas (→ accessibility.md → Touch)](#hit-areas)
 - [Shadows Over Borders](#shadows-over-borders)
 - [Image Outlines](#image-outlines)
-- [Scrollbar Gutter](#scrollbar-gutter)
-- [Tame Native Scrollbars](#tame-native-scrollbars)
+- [Scroll Containers (→ scroll-containers.md)](#scroll-containers)
 - [Long-form Layouts](#long-form-layouts)
 - [Safe Areas (Mobile Notch)](#safe-areas-mobile-notch)
 - [Content Resilience](#content-resilience)
@@ -137,48 +136,9 @@ img {
 <img className="outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10" />
 ```
 
-## Scrollbar Gutter
+## Scroll Containers
 
-Reserve space for the scrollbar on scrollable containers so content doesn't shift horizontally when the scrollbar appears.
-
-- Apply to modal bodies, side panels, dialogs with dynamic content — any scrollable container where expand/collapse could trigger overflow
-- Safe no-op on platforms with overlay scrollbars (most macOS, iOS default), so the cost is zero
-- Baseline since 2023
-
-```css
-.modal-body {
-  overflow-y: auto;
-  scrollbar-gutter: stable;
-}
-```
-
-## Tame Native Scrollbars
-
-Default scrollbars (especially Windows/Chrome) are visually loud and break the integrity of a tuned UI. The standards two-liner fixes it:
-
-```css
-.scrollable-region {
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-}
-```
-
-Always tie the thumb color to a design token (`--border`, `--muted`, whatever your system calls the subtle stroke color). Hardcoding `gray` means the scrollbar drifts from the rest of the UI when the palette shifts (dark mode, brand re-tint).
-
-**Apply to inset scroll containers**, not the document. A blanket `*` rule flattens the page's main scrollbar too, which is the one place a normal-width control still helps usability — thin scrollbars are harder to grab and the position indicator becomes less legible. Scope to sidebars, modal bodies, command menus, dropdowns, code blocks, table wrappers.
-
-**Browser support.** Both properties are baseline since Chrome 121 (Jan 2024) and Safari 18.2 (Dec 2024). For most product codebases in 2026, no fallback needed. If your support contract reaches pre-2024 Safari, add the prefixed version:
-
-```css
-.scrollable-region::-webkit-scrollbar { width: 5px; }
-.scrollable-region::-webkit-scrollbar-track { background: transparent; }
-.scrollable-region::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 5px;
-}
-```
-
-**Pair with `scrollbar-gutter: stable`** on containers where the scrollbar appears and disappears (modal bodies, dynamic lists), to prevent horizontal content shift.
+Scrollbar gutter, tamed native scrollbars, and edge masking moved to [scroll-containers.md](scroll-containers.md) — the three rules that make an inset scroll container feel intentional.
 
 ## Long-form Layouts
 
@@ -328,4 +288,4 @@ Align to a baseline grid. Body text leading defines the unit; spacing between bl
 
 ## Attribution
 
-Synthesized from: pbakaus/impeccable `spatial-design.md`, jakubkrehel/make-interfaces-feel-better `surfaces.md`, emilkowalski/skill, zenobi-us/dotfiles `basic-design-principles` (elevation consistency rule), MDN web docs (`scrollbar-gutter`), vercel-labs/web-interface-guidelines (safe areas, content resilience, anchored headings), rauno freiberg + chánh đại on scrollbar styling (tame native scrollbars).
+Synthesized from: pbakaus/impeccable `spatial-design.md`, jakubkrehel/make-interfaces-feel-better `surfaces.md`, emilkowalski/skill, zenobi-us/dotfiles `basic-design-principles` (elevation consistency rule), vercel-labs/web-interface-guidelines (safe areas, content resilience, anchored headings). Scroll-container craft (gutter, native scrollbars, edge mask) is its own reference — see [scroll-containers.md](scroll-containers.md).

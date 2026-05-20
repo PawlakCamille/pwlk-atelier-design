@@ -80,6 +80,7 @@ Close with the walkthrough offer and (after fixes) the Verify pass — see paren
 ## References
 
 - `../cami-design/references/spacing-layout.md` — grids, rhythm, concentric radius, shadows vs borders, safe areas, content resilience
+- `../cami-design/references/scroll-containers.md` — scrollbar gutter, tamed native scrollbars, scroll edge mask
 - `../cami-design/references/typography.md` — vertical rhythm, line-height, hierarchy through weight
 - `../cami-design/references/accessibility.md` — hit areas, contrast, focus order
 - `../cami-design/references/anti-patterns.md` — sweep last for "AI slop" tells (identical card grids, mixed icon weights, `h-screen` traps, side-stripe borders)
