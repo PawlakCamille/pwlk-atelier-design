@@ -6,6 +6,24 @@ Format: newest first. Group under a version heading. Include date.
 
 ---
 
+## 0.2.3 — 2026-05-20 — extract scroll-containers reference and add scroll edge mask
+
+`spacing-layout.md` had grown to 331 lines, twice the next-largest reference, and its scrollbar-related sections were starting to read as their own topic. Split them out and added a third pattern that completes the set.
+
+### New reference
+
+- **`references/scroll-containers.md`.** Three rules that make an inset scroll container feel intentional: scrollbar gutter, tamed native scrollbars, and scroll edge mask. Loaded on demand, indexed in both conditional-reads and shared-references tables of the parent SKILL.
+
+### New pattern
+
+- **Scroll Edge Mask** in `scroll-containers.md`. CSS-only fade on scrollable edges using `mask-image` and `animation-timeline: scroll()`. Signals scrollability without copy or JS. Includes the sticky-children pitfall and a `@supports` gate for Safari and Firefox. Source: twilson.net/scroll-mask.
+
+### Moved (no content change)
+
+- *Scrollbar Gutter* and *Tame Native Scrollbars* moved from `spacing-layout.md` into the new file. The host file keeps a one-line pointer. Cross-references updated in `anti-patterns.md` and `cami-design-layout/SKILL.md`.
+
+---
+
 ## 0.2.2 — 2026-05-14 — engineer skill: absorb review-quality findings
 
 Three sources, one release. (1) Skill-comparison reports — `cami-design-engineer` run head-to-head with `/review` and `vercel-composition-patterns` on real-world feature PRs. (2) `5988d0c`, an unpushed local commit from 2026-05-09 that absorbed three patterns from garrytan/gstack but never reached `main`. (3) Code-review feedback collected across a batch of production PRs. `vercel-composition-patterns` surfaced almost nothing net-new; the comparison reports, gstack, and the production review feedback carried the signal.

@@ -116,7 +116,7 @@ Mixing icon libraries with different stroke widths (1.5px vs 2px) in the same UI
 
 ## Default Native Scrollbars on Inset Containers
 
-Sidebars, modal bodies, command menus, and dropdowns rendering with the OS default scrollbar (chunky, untoken'd, often a different gray than the rest of the UI). It signals "design stopped at the container edge." Two CSS rules tie scrollbars into the design system. See `spacing-layout.md` → *Tame Native Scrollbars*.
+Sidebars, modal bodies, command menus, and dropdowns rendering with the OS default scrollbar (chunky, untoken'd, often a different gray than the rest of the UI). It signals "design stopped at the container edge." Two CSS rules tie scrollbars into the design system. See `scroll-containers.md` → *Tame Native Scrollbars*.
 
 ## Copy AI Tells
 
